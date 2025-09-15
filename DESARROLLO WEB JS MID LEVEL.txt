@@ -1,0 +1,201 @@
+JS MID LEVEL
+
+events
+-window.open("url"); ----> abre una ventana en una nueva pestaña
+-window.close(); ----> cierra la ventna
+-alert(" "); ----> muestra mensaje por pantalla
+-print(); ---> se usa para imprimir
+-prompt(" "); ---> pide un dato al usuario (devuelve string)
+-confirm(" ")-----> hace una pregunta al usuario (aceptar=true , cancelar=false)
+
+
+events de screen
+-window.screen.height ---> devuelve el largo de la pantalla
+-window.screen.width  ----> devuelve el ancho de la pantalla
+-window.scroll(x,y) ---> scrollea la pagina segun el eje x e y que le indicamos
+
+location
+-window.location.href/hostname ----> devuelve el link de la pag/devuelve el dominio de la pag
+-window.assign() ----> carga un nuevo documento
+
+Para ver cuanto tiempo carga la pagina:
+abrir la consola en chrome, poner red y actualizar la pagina, ahi se ve el tiempo de carga, y cuanto pesa la pagina
+
+
+EVENTOS
+los eventos son las cosas que pasan en la web
+los cambios que pasan
+van en la etiqueta html del elemento o en el addEventListener en js
+
+--Eventos de mouse
+-onclick="nombreEvento()"
+-dbclick
+-mouseover
+-mouseout
+-contextmenu --->click derecho
+-mouseleave
+
+-Eventos de teclado
+-keydown ---> al presionar una tecla
+de aca para abajo solo va asi en js:
+
+addEventListener("click",(e) =>{
+});
+
+-keypress
+-keyup
+
+--Eventos de interfaz
+-error  ---> se usan para cuando no cargue una imagen o video muy pesados
+-load   ---> cuando carga la pagina
+-unload
+-resize  ---> cuando se cambia la resolucion de la pantqlla
+-scroll  ---> cuando se scrollea
+-select ---> cuando se selecciona
+
+
+
+
+en js:
+function nombreEvento(){
+
+}
+
+
+para ahacer click en cualquier punto de la pagina y que devuelva una funcion: 
+en js:
+
+var nombreVariable = document.getElementById(" ");
+
+nombreVariable.addEventListener("click",(e) =>{
+
+	e.stopPropagation();   ----> es opcional, se usa para que si tengo muchas funciones, se ejecuta esta sola
+
+
+
+  }true);  ---> el true es opcional, se pone para q tenga mas jerarquia
+
+
+-TEMPORIZADORES
+permite iniciar funciones durante y con delay de tiempo (va todo en js)
+estuctura funcion:
+
+function play(){
+	variable = setInterval (function(){
+
+
+
+
+	},2000);
+}
+
+function stop(){
+	clearInterval(variable);
+}
+
+otra forma mas sencilla de hacerlo:
+-setTimeout(nombreFuncion,3000)   --->la funcion "nombreFuncion" se inicia despues de 3 segundos
+-setInterval(nombreFuncion,3000) ----> la funcion se ejecuta cada 3 segundos
+-clearTimeOut(nombreFuncion) ---> corta la inicializacion de la funcion
+-clearInterval(nombreFuncion) ---> corta la ejecucion de la funcion
+
+****COSAS IMPORTANTES
+.innerHTML es re importante agrega contenido a la mpagina desde js
+.value agarra el valor de x elemento o variable
+parseInt() verifica o cambia a numero entero la variable
+
+
+-try catch: si el try no se cumple, muestra el catch. el finally se muestra siempre pero es opcional estrcutura:
+
+try{
+
+}
+
+catch(error){
+
+}
+finally{
+
+}
+
+
+
+-Callbacks (funcion dentro de otra funcion)
+estructura:
+
+function prueba(callback){
+	callback("lucas");
+
+}
+
+function decirNombre(nombre){
+	console.log(nombre)
+}
+
+prueba(decirNombre);   ---> muestra lucas por consola
+
+
+-PROMESAS (siempre va a contener resolve y reject)
+estructura:
+
+var nombre = "lucas";
+var promesa = new Promise((resolve,reject)=>{
+	if(nombre!="lucas"){
+
+		reject ("no es lucas")
+	}else{
+		resolve(nombre)
+	}
+})
+
+promesa.then(resultado) =>{     ; -----> accede al dato del resolve
+	console.log(resultado)
+}).catch(e)=>{
+	console.log(e)
+});
+
+
+-PETICIONES HTTP (AJAX)
+son las peticiones que enviamos nosotros a un servidor y el servidor nos devuelve informacion
+es CLIENTE - SERVIDOR
+nuestro navegador es el cliente (toda la informacion que puede acceder el usuario en la web) y el servidor es el que guarda la informacion de la web
+las peticiones http no guardan informacion
+ajax es una herramienta para enviar solicitudes/peticiones al servidor
+
+-DATOS ESTRUCTURADOS (JSON)
+estrucura json deserializado:
+*CUANDO TRABAJMOS USAMOS EN FORMATO DESEREALIZADO
+nombreObjeto = {
+	"variable1" = "pepito";
+	"variable2" = "jorge";
+} 
+*CUANDO ENVIAMOS Y RICIBIMOS LOS DATOS LOS USAMOS CON STRING (SERIALIZADO)
+cuando un objeto json esta serializado esta en formato string (con las ' ')
+estructura json serializado(formato string):
+nombreObjeto = '{
+	"variable1" = "pepito";
+	"variable2" = "jorge";
+}'
+
+*otra forma de serializar: var serealizado = JSON.stringify(objetoDeserealizado);
+*otra forma de deserealizar: var deserializado  = JSON.parse(objetoSerializado);
+
+AJAX
+-descargar la ultima version de xampp
+-una vez descargado abrir el xampp control exe y darle start a los dos primeros
+-abrir htdocs y borrar el contenido y crear una carpeta nueva
+-abrir chrome y buscar localhost
+-tirar la carpeta creada en htdocs y tirarlo en el visual studio code
+
+
+envia peticiones GET y POST
+
+estructura en js:
+
+fetch("link de la pag reqres con post "),{
+	method: "POST",
+	body: '{"nombre" : "Lucas }',
+	headers: { "Content-type" : "application/json"}
+})
+	.then(res=>res.json());
+	.then(res=>console.log(res));

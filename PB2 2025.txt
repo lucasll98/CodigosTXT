@@ -1,0 +1,193 @@
+7 de mayo
+18 junio
+
+CREAR PROYECTO
+NUEVO - PROYECTO JAVA PROYECT , JAVA 11 - NEXT - CREATE NEW SOURCE FOLDER - test - libraries - CLASSPATH -ADDLIBRARY - JUNIT 4- FINISH
+
+-CREAR PAQUETE DOMINIO EN SRC Y EN TEST
+-GIT INIT ---> INICIALIZA UN REPO LOCAL
+-GIT PULL ---> DESCARGA Y TRAE TODOS LOS CAMBIOS A NUESTRO REPO
+-GIT BRANCH CAMBIA DE RAMA
+-GIT CHECKOUT -B CREA UNA NUEVA RAMA
+-GIT MERGE FUSIONA LAS RAMAS
+-GIT ADD .   ---> agrega todos nuestros cambios y actualizaciones a nuestro repo
+-GIT COMMIT -m " ..."   ---> crea los checkpoints en el repo
+-GIT PUSH   --->sube los commits al repo de github
+
+CUANDO TRABAJAMOS EN UN REPO YA EMPEZADO
+ABRIMOS GIT BASH EN LA CARPETA DEL PROYECTO
+1-GIT PULL
+2-GIT STATUS
+3-GIT CHECKOUT NOMBRERAMA
+HACEMOS NUESTROS CAMBIOS Y ACTUALIZACIONES
+4-GIT ADD . 
+5-GIT COMMIT -m "..."
+6-GIT PUSH
+
+LA CLASE DE TEST SIEMPRE VA ASI: NombreClaseTest
+
+
+TEST:
+@Test
+public void nombreTest(){
+	
+	//preparacion
+
+	//ejecucion
+
+	//verificacion
+
+	//---------------
+	
+}
+
+-assertFalse
+-assertTrue
+-assertNotNull
+-assertEquals
+-assertNotEquals
+
+assertEquals(valorEsperado, valorObtenido);
+
+
+BEFORE
+lo que yo use en el before se inicializa primero que todo
+funciona similar al constructor
+private Objeto objeto
+
+@Before
+public void init(){
+this.objeto = new Objeto();
+}
+
+
+@Before
+public void nombreMetodo(){
+
+}
+
+COLECCIONES
+LIST
+-ArrayList : es formato array, va agregando las posiciones continuadas
+-LinkedList : tiene el mismo funcionamiento que arraylist pero sus posiciones en memoria estan aleatorias
+AMBOS ADMITEN DUPLICADOS
+
+declaracion:
+private ArrayList<Objeto> nombreArrayList;
+en el constructor: this.nombreArrayList = new ArrayList();
+nombre.add(objeto);
+
+
+
+PARA NO ADMITIR DUPLICADOS SE USA EL HASHCODE EN LA CLASE DEL OBJETO CON UN ATRIBUTO IDENTIFICADOR, Y LA COLECCION HASHSET
+SET (HashSet y HashCode van de la mano)
+NO ADMITEN DUPLICADOS, HAY QUE USAR EL HASHCODE ADEMAS DEL HASHSET
+private HashSet <Objeto> nombreColeccionSinDuplicados;
+en el constructor: this.nombreColeccionSinDuplicados = new HashSet<>();
+
+-HashSet : NO ADMITE DUPLICADOS
+-TreeSet : no admite duplicados y ordena
+
+IMPORTANTISIMO!!!!!!!
+EL HASHCODE SIRVE PARA NO ACEPTAR DUPLICADOS, VAMOS A LA CLASE DEL OBJETO QUE NO QUEREMOS DUPLICADOS, GENERAMOS EL HASHCODE CON EL SOURCE Y LE PONEMOS EL ATRIBUTO QUE UTILIZAMOS PARA DIFERENCIAR Y LO GENERAMOS, SINO NO DETECTA DUPLICADOS SOLO EL HASHSET
+
+
+-metodos aplicables a colecciones
+.size()
+.add(objeto)
+.contains()
+.push()
+
+
+SI TENES QUE INCLUIR AYTRIBUTOS Q PUEDAN SER UTILIZADOS POR OBJETOS, USA HERENCIA O CLASE ABSTRACTA
+SI NECESITAS SOLO METODOS UTILIZA INTERFAZ
+
+INTERFACES
+se suele incluir la firma de metodos
+estructura
+
+public interface NombreInterfaz {
+	Boolean agregarPaquete(Paquete paquete)
+
+}
+
+las clases que implementan la interfaz se utiliza el implements NombreInterfaz en la firma de la clase
+
+HERENCIA: atributos
+INTERFAZ: metodos
+CLASE ABSTRACTA: metodos y atributos
+
+extends ---> herencia y clase abstracta
+implements ---> comparable y comparator
+
+EXCEPCIONES
+son cuando hay una falla o algo que no esta permitido, son excepciones, reemplazan a los return false o return null
+en caso de que quiere aplicar una excepcion en la clase principal del proyecto se hace lo siguiente dentro del if:
+estructura:
+throw new nombreDeLaEcepcionException("No se puede realizar la accion");  ---> siempre se pone el Exception al final
+
+y creamos una nueva clase, con constructor que le llega un mensaje por parametro por herencia:
+ public class nombreEcepcionException extends Exception {
+	public nombreEcepcionException (String mensaje){
+	super(mensaje)
+	}
+}
+
+en el metodo de la clase principal donde se use la Exception tendremos q agregarle a la firma del metodo el throws NombreDeLaEcepcionException{
+
+luego en el test: en la firma del metodo del test tambien se le agrega el:  throws NombreDeLaEcepcionException{
+y en la linea del @Test(expected = NombreDeLaEcepcionException.class)
+
+
+ORDENAMIENTO
+AMBAS COMPARABLE Y COMPARATOR TRABAJN CON COLECCIONES TreeSet
+COMPARABLE
+Se le agrega implements Comparable <NombreClase> a la clase donde quiero ordenar
+Se le implementa el metodo compareTo(objeto1)
+luego en la coleccion TreeSet la obtengo en el test
+y la muestro con el for, y voy preguntando con un contador iterador mediante ifs si coincide con assertEquals los objetos dentro de la coleccion
+
+
+COMPARATOR
+es mas complejo ya que requiere crear otra clase	
+se crea una nueva nueva clase, en donde se pone implements Comparator <NombreClase> (nombre de la clase que se quiere ordenar)
+y se invoca el metodo compare(objeto1, objeto2)
+luego en el constructor de la clase principal, en la coleccion que se quiere ordenar, va a ser de tipo TreeSet y se le pone el nombre de la clase Comparator ejemplo: Set <Jugador> jugadoresOrdenados = new TreeSet <> (new JugadoresOrdenados());
+luego en el test obtengo la coleccion, la recorro con un for y con un if y un contador incrementado voy preguntando con u nassertEquals en cada iteracion, en cada if si el objeto de turno coincide
+
+
+Aclaracion: depende de como ponga el orden en el metodo compareTo o compare, ordena ascendente o descendente
+Las colecciones de tipo List se ordenan mucho mas facil: Collections.sort(nombreColeccion)  ,necesita Comparable
+
+
+ORDENAMIENTO MULTIPLE
+Para hacer un ordenamiento multiple, se tiene que usar, ambas clases Comparator,
+instanciar ambas clases comparator dentro de los test , ejemplo: NombreClaseOrdenamiento nombreOrdenamiento = new NombreClaseOrdenamiento ();
+luego de las instancias, usar el Comparator con el nombre clase que quiero ordenar
+Comparator <NombreClase> ordenamientoMultipleComparator = nombreOrdenamiento.thenComparing(nombreDelOtroOrdenamiento);
+
+luego se instancia la coleccion TreeSet: Set <NombreClase> ordenamientoMultipleColeccion = new TreeSet (new ordenamientoMultipleComparator());
+
+MAP
+tiene una clave, y el valor que tiene esa clave
+tiene mucha mas flexibilidad que las colecciones
+LA CLAVE GENERALMENTE ES SIMPLE, YA QUE ES POR DONDE SE BUSCA
+tiene implementaciones HashMap y TreeMap
+
+estructura simple:
+Map <TipoClave, TipoValor> mapa = new HashMap <>();
+agregar al mapa: mapa.put(valorClave, valorValor);
+eliminar del mapa: mapa.remove
+obtener valor: mapa.get(valorClave);
+
+estructura con mapa de coleccion:
+Map <TipoClave, Set<Persona>> mapa = new HashMap <>();
+
+ejemplo: agregar persona a un map con coleccion lista:
+Map <Integer, List <Persona>> mapaColeccion = new HashMap <>();
+mapaColeccion.put(1,new ArrayList<>());
+
+List <Persona> coleccion1 = mapaColeccion.get(1);
+coleccion1.add(persona);
+
+o tambien se puede primero crear la coleccion lista y poner la variable directamente cuando creamos el mapa del lado del valor

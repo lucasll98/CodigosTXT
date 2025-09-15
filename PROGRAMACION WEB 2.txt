@@ -1,0 +1,394 @@
+PROGRAMACION WEB 2
+CLASE 1
+un programa es un conjunto de algoritmos para solucionar un problema o hacer una tarea
+una aplicacion es un conjunto general de programas para resolver un problema mayor 
+
+una aplicacion web utiliza la tecnologia www como ambiente de despliegue
+intercamvia informacion entre la app y el cliente en protocolos de internet 
+el mediador de comunicacioj entre el usuario y la app  es el navegador web 
+
+http es el protocolo de texto de hipertexto que establece como se va a comunicar el navegador con el servidor web
+es un protocolo de transferencia de texto entre cliente/ servidor peticion/respuesta (get, post, etc) 
+
+el dns es un protoclo que asocia un nombre de dominio a una ip
+el dns es como una agenda telefonica, pregunto el nombre duelve la ip
+la dns es un esquema jerarquico, en donde tu equipo se conecta a un servidor dns local y ese se conecta a diferentes servidores dns 
+
+para que un dispositivo pueda navegar en interter se necesita:
+ip
+mascara
+puerta de nlace
+dns 
+
+ip: 192.168.0.00
+mascara: 255.255.255.0
+                   red                 host 
+
+default getaway (puerta de enlace router): 192.168.0.1
+dns
+
+
+
+la rfc es la requesst for comment, decide como se maneja internet 
+
+internet se maneja por paquetes 
+
+backend y frontend se comunicqn a travez del protocolo http
+no comparten ni tecnologia ni arquitectura 
+
+el cliente se comunica con el servidor a travez de peticiones get/post que el servidor responde 
+
+las responsabilidades de app web
+interfaz al cliente: html, css, javascript
+servidor: php jsp asp
+acceso de base de datos: sql 
+
+una url es unica en todo el mundo
+
+CLASE 2
+
+boostrap
+para usar boostrap se tiene que pegar el link y el script de la pagina de boostrap en el head de la pagina del html
+despues se copian y pegar los elementos que se quieren usar (usan clases especificas de boostrap)
+col-12 significa que ocupa todo el ancho de la pantalla, col-6 es la mitad
+boostrap responsive
+col-sm-6 ---> significa que cuando la pantalla es small, la columna pasa a 6
+col-md-4 ---> cuando la pantalla es media la columna pasa a 4
+
+FORM
+un form en el html debe tener el method="get/post" y el action con un link de la pagina
+y los inputs deben tener id, value, name
+el boton para enviar debe ser un input de tipo SUBMIT y value enviar
+
+
+
+
+CLASE 2
+PHP
+
+php corre en el lado del servidor
+ide php storm/visual studio
+php es interpretado, se ejecuta linea a linea
+SE CODEA EL PHP DENTRO DEL HTML
+el servidor web agrra un archivo que el cliente noso pide por peticiones get/post y se lo da al cliente
+HAY QUE HACER EL index.php dentro de la carpeta htdocs de la carpeta del xampp C:\xampp\htdocs
+HAY QUE PONER localhost en el buscador de chrome
+EL PHP SE EJECUTA DEL LADO DEL SERVIDOR WEB
+EL PHP ES NUESTRO BACKEND, NO SE VE EN LA PAGINA WEB, PERO SI LE PONEMOS ETIQUETAS HTML SI, MIESTRAS QUE EL HTML ES EL FRONTEND
+TODAS LAS VARIABLES EN PHP SE EMPIEZAN CON $nombreVariable
+las variables son tipos dinamicos, pueden ser tipo string, integer,double, object, array, boolean, NULL
+las variables globales son las que viven en todo el codigo php
+
+varaibles globales: 
+	$nombreVariable = $_GET/POST["nombreVariable"];
+	echo "hola" . $nombreVariable;
+
+	y poner en la url: ?nombre=lucas
+
+PARA IMPORTAR ARCHIVOS: include "archivo.php";
+			require_once "archivo.php";
+LLAMAR FUNCION 
+$nombreVariable = nombreFuncion();
+
+iterar
+foreach ($nombre as $nombre){
+	echo "<h2 hola $nombre/>";
+}
+
+SOLO SE EMBEBE el php con una etiqueta html cuando necesito mostrar ese dato
+
+
+EL PHP ARRANCA CON LA ETIQUETA
+<?php
+
+codigo php
+
+?>	
+
+
+COMANDOS PHP
+
+echo  ---> mostrar por pantalla
+
+SE CONCATENA CON . 
+ejemplo: echo "hola" . "lucas";
+
+COMO SABER SI UNA VARIABLE EXISTE
+isset( $_GET["nombre"]){
+	$nombre = $_GET["nombre"];
+	echo "hola " . $nombre;
+
+
+
+se puede hacer hasta el 5 de la guia de miel
+
+
+
+FUNCIONES
+
+function nombreFuncion (parametro){
+
+return ...
+
+}
+
+PARA IMPORTAR TEMPLATES DE CSS EN PHP: W3SCHOOLCSS, lo guardamos en un archivo oaparte php y lo incluimos en nuestro php con include
+
+INCLUIR PARTES DE CODIGO HTML AL PHP
+<?php
+include ("footer.html");
+?>
+
+
+FUNCIONES
+-gettype() devuelve el tipo de una variable
+- is_type comprueban si una variable es de un tipo dado:
+	is_array(), is_bool(), is_float(), is_integer(), is_null(), is_numeric(),
+	is_object(), is_resource(), is_scalar(),
+	is_string()
+-var_dump() muestra el tipo y el valor de una variable
+-isset() verifica si un variable existe
+– settype() Setea el tipo de una variable
+– empty() Verifica si una variable esta vacia
+– intval(), doubleval(), strval() Convierte el tipo de varible
+
+finalizar ejecucion del programa: die(), exit();
+
+funciones de arrays: 
+array_search()  busca dentro de un array
+count() cuenta los elelemtso de un array
+sort(), ordena un array
+ksort() ordena por claves un array
+
+
+
+ARRAYS
+para agregar un elemento al final de un array ya seteado:
+nombreArray[] = "elementoAAgregar";
+LOS ARRAY EN PHP PERMITEN GUARDAR CLAVE VALOR COMO SI FUESE UN MAP
+ESTOS TIPOS DE ARRAY SE RECORREN SOLO CON FOREACH
+$arrayEmailsProfes = ["juan" => "juan@gmail.com" , "emilio" => "emilio@gmail.com"]
+
+echo $arrayEmailsProfes["emilio"];  ----> muestra el mail de emilio
+
+mostrarlo:
+foreach ($emailDocentes as $clave => $valor){
+	echo $clave . ":" . $valor;
+
+}
+
+		
+ARRAYS DENTRO DE UN ARRAY
+
+$jugadores = [ [ "nombre" => "messi" , "dorsal" => 10, "habilidades" => ["gambeta" , "tiro"] ] ,
+		[ "nombre" => "cr7" , "dorsal" => 7, "habilidades" => ["tiro" , "cabezazo"] ]; 
+
+para mostrarlo:
+
+foreach($jugadores as $jugador){
+	echo $jugador["nombre"];
+	echo $jugador["dorsal"];
+		foreach($jugador["habilidades"] as $habilidad){
+			echo $habilidad;
+}
+}
+
+COMO MANDAR DATOS REALES DESDE UN FORM AL SERVIDOR Y BASE DE DATOS
+EL ATRIBUTO NAME DEL INPUT SE TOMA EN EL SERVIDOR CON LAS PETICIONES GET/POST
+GET LO MANDA MEMDIANTE LA URL
+POST LO MANDA MEDIANTE EL BODY
+
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Crea tu Personaje RPG (GET)</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        body {
+            background-image: url('https://w.wallha.com/ws/12/j2Vv0X1p.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .w3-card-4 {
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="w3-card-4 w3-margin-auto w3-animate-zoom" style="max-width:600px;">
+    <div class="w3-container w3-center w3-pink w3-round-large">
+        <h2 class="w3-text-white">Crea tu Personaje RPG</h2>
+    </div>
+    <div class="w3-padding">
+    <?php
+
+    $nombre = $_POST["nombre"];
+    echo "<p>Hola " . $nombre . "!</p>";
+
+    $nivel = $_POST["nivel"];
+    echo "<p>Nivel:" . $nivel . "</p>";
+
+    $email = $_POST["email"];
+    echo "<p>Email:" . $email . "</p>";
+
+    $password = $_POST["password"];
+    echo "<p>Pass:" . $password . "</p>";
+
+    $clase = $_POST["clase"];
+    echo "<p>Clase:" . $clase . "</p>";
+
+    $raza = $_POST["raza"];
+    echo "<p>Raza:" . $raza . "</p>";
+
+    $habilidades = $_POST["habilidades"];
+    //echo "<p>Habilidades:" . implode(",", $habilidades) . "</p>";
+    foreach ($habilidades as $habilidad) {
+        echo "<p>Habilidad:" . $habilidad . "</p>";
+    }
+
+    $fecha_creacion = $_POST["fecha_creacion"];
+    echo "<p>Fecha creacion:" . $fecha_creacion . "</p>";
+
+    $hora_batalla = $_POST["hora_batalla"];
+    echo "<p>Hora batalla:" . $hora_batalla . "</p>";
+
+    $descripcion = $_POST["descripcion"];
+    echo "<p>Descripcion:" . $descripcion . "</p>";
+
+    $id_personaje = $_POST["id_personaje"];
+    echo "<p>ID personaje:" . $id_personaje . "</p>";
+
+    // Directorio donde se guardarán las imágenes
+    $directorioDestino = "images/";
+
+    // 1. Validar que la superglobal $_FILES existe
+    if (isset($_FILES['retrato'])) {
+
+        // Almacenar la información del archivo en variables para mayor legibilidad
+        $nombreArchivo = $_FILES['retrato']['name'];
+        $tipoArchivo   = $_FILES['retrato']['type'];
+        $tamanoArchivo = $_FILES['retrato']['size'];
+        $nombreTemporal = $_FILES['retrato']['tmp_name'];
+        $errorArchivo = $_FILES['retrato']['error'];
+
+        // Array de errores para ir acumulando los mensajes
+        $errores = [];
+
+        // 2. Validar que no haya errores de subida
+        if ($errorArchivo !== UPLOAD_ERR_OK) {
+            $errores[] = "Error al subir el archivo. Código de error: " . $errorArchivo;
+        }
+
+        // Si no hay errores iniciales, continuar con el resto de las validaciones
+        if (empty($errores)) {
+
+            // 3. Validar el tamaño del archivo (por ejemplo, máximo 2MB)
+            $tamanoMaximo = 2 * 1024 * 1024; // 2 MB en bytes
+            if ($tamanoArchivo > $tamanoMaximo) {
+                $errores[] = "El tamaño del archivo excede el límite de 2MB.";
+            }
+
+            // 4. Validar el tipo de archivo (solo imágenes JPG, PNG, GIF)
+            $tiposPermitidos = ['image/jpeg', 'image/png', 'image/gif'];
+            // Usar la función getimagesize() para una validación más segura del tipo MIME real
+            $tipoMimeReal = mime_content_type($nombreTemporal);
+            if (!in_array($tipoMimeReal, $tiposPermitidos)) {
+                $errores[] = "Tipo de archivo no permitido. Solo se aceptan JPG, PNG y GIF.";
+            }
+
+            // 5. Validar que no exista un archivo con el mismo nombre en el destino
+            $rutaCompleta = $directorioDestino . basename($nombreArchivo);
+            if (file_exists($rutaCompleta)) {
+                $errores[] = "Ya existe un archivo con el mismo nombre.";
+            }
+        }
+
+        // 6. Verificar si se encontraron errores
+        if (!empty($errores)) {
+            echo "<h2>Errores en la subida:</h2>";
+            echo "<ul>";
+            foreach ($errores as $error) {
+                echo "<li>$error</li>";
+            }
+            echo "</ul>";
+        } else {
+            // 7. Si todo es correcto, mover el archivo temporal al destino final
+            if (move_uploaded_file($nombreTemporal, $rutaCompleta)) {
+                echo "<h2>¡Éxito!</h2>";
+                echo "La imagen " . htmlspecialchars($nombreArchivo) . " ha sido subida correctamente.";
+                echo "<br><img src='$rutaCompleta' alt='Imagen subida' style='max-width:300px;'>";
+            } else {
+                // Este error puede ocurrir por permisos en la carpeta, etc.
+                echo "Error al mover el archivo a su directorio final.";
+            }
+        }
+
+    } else {
+        echo "No se recibió ninguna imagen.";
+    }
+    ?>
+    </div>
+</div>
+
+</body>
+</html>
+
+ejercicio 7 de la guia
+ejercicio 8
+ejercicio 9
+ejercicio 10
+ejercicio 11
+ejercicio 12
+
+CLASES EN PHP
+class NombreClase {
+	private $nombreVariable;
+
+	public function __nombreVariable($nombreVariable){
+	$this->nombre = $nombre;
+}
+
+para instanciar: $NombreClase = new NombreClase ($nombreAtributos"valor", etc...);
+
+
+CLASE 4
+las bases de datos laburan CLIENTE (php, java, workbench, phpMyADmin) - SERVIDOR (es el motor)(mySQL)
+
+LAS BASES DE DATOS TIENEN QUE TENER DIFERENTES PUERTOS
+
+el gestor de base d edatos te da las herrramientas necesarias para interactuar con las bases de datos
+cosas que se necesitan para conectarse a una base de datos
+workbench mysql, phpmyadmin
+lenguaje sql
+herramientas de php para conectarse a la base sql
+LA BASE DE DATOS CORRE EN EL SERVIDOR (apache)
+
+pasos:
+conectarse
+hacer lo q queres hacer
+procesar los datos
+desconectarse
+
+CONECTARSE
+$conexion = mysqli_connect("servidor","usuario","password") or die ("no se puede conectar");
+$sql = "SELECT * FROM nombreTabla";
+$result = mysqli_query($conexion,$sql);
+
+
+BAJAR LA EXTENSION MYSQL EN VISUAL
+
+
+

@@ -1,0 +1,208 @@
+JAVASCRIPT AVANZADO
+
+OPERADORES FUNCIONALES
+-FILTER:
+crea un nuevo array con los elementos segun la funcion dada, devuelve un nuevo vector y trabaja sobre vectores
+no hace falta poner un for, lo recorre igual
+
+ejemplo: (en un vector cual elemento supera la longitud de 6 caracteres)
+
+const palabras = ['casa', 'perro', 'electrodoméstico', 'universidad',
+'mueblería', 'gato'];
+const resultado = palabras.filter(p => p.length > 6);
+console.log(resultado);
+
+
+-MAP:
+crea un nuevo array con los lelementos segun la funcion dada, devuelve array y trabaj sobre array
+
+ejemplo: (multiplicar por 2 todos los elementos del array numbers)
+
+var numbers = [1, 5, 10, 15];
+var doubles = numbers.map(function(x) {
+ return x * 2;
+}); // doubles is now [2, 10, 20, 30]
+// numbers is still [1, 5, 10, 15]
+
+
+-REDUCE:
+ejecuta una funcion reductora sobre cada elemento del array, devolviendi como resultado un unico valor
+
+ejemplo 1:
+const array1 = [1, 2, 3, 4];
+const reducer = (accumulator, currentValue) => accumulator + currentValue; //
+1 + 2 + 3 + 4
+console.log(array1.reduce(reducer)); // expected output: 10 (1 + 2 + 3 + 4)
+console.log(array1.reduce(reducer, 5)); // expected output: 15
+
+ejemplo 2 (me dice cuantas milanesas hay en el vector comidas):
+var comidas = [{plato: "milanesa"}, {plato: "pizza"},{plato: "milanesa"}];
+var cantMilanesas = comidas.reduce(function(contador,element){
+	if(element.plato=="milanesa"){
+		return contador ++;
+	}else{
+		return contador;
+	}
+},0);
+
+console.log(cantMilanesas);
+
+
+
+-FIND:
+devuelve el valor del primer elemento del array que cumpla con la funcion indicada
+trabaja en arrays y no devuelve un vector, devuelve un solo elemento encontrado
+
+ejemplo: (devuelve el primer numero q encuentre mayor a 10)
+const numeros = [5, 12, 8, 130, 44];
+const nroMayorADiez = numeros.find(n => n > 10);
+console.log(nroMayorADiez);
+// expected output: 12
+
+
+-SOME:
+comprueba si al menos un elemento del array cumple con la condicion
+a diferencia de find, recorre todo el array para ver si hay mas elementos que cumplen
+DEVUELVE TRUE O FALSE
+
+ejemplo(busca si hay numeros pares)
+const numeros = [1, 2, 3, 4, 5];
+// comprobamos si algún element es par
+console.log(numeros.some(n => n % 2 === 0 ));
+// expected output: true
+
+
+-EVERY:
+detemrina si todos los elementos ne el array cumple con la condicion
+DEVUELVE TRUE O FALSE
+
+ejemplo: (si todos los elementos son mayores o igales a 3)
+const numeros = [1, 2, 3, 4, 5];
+console.log(numeros.every(n => n >=3));
+// expected output: false
+
+
+
+
+
+FUNCIONES ANONIMAS
+son funciones que no se le declara un nombre
+
+var saludo = function (persona){
+ alert("Hola " + persona);
+}
+saludo("Lucas");
+
+
+
+- setTimeout()
+este metodo llama a una funcion despues de un numero especifico de milisegundos, solo se jeecuta una vez
+ESTRUCTURA
+function nombreFuncion(){
+	setTimeout(otraFuncion,3000)
+);
+
+function otraFuncion(){
+
+};
+
+nombreFuncion(); //llamamos a la función
+
+
+Parámetros
+setTimeout(a,b);
+a = la función que se va a ejecutar pasado el tiempo definido.
+b = el tiempo que debe “esperar” antes de ejecutar la función. En milisegundos.
+1000 ms = 1 seg
+El parámetro “a” es una función previamente definida que podemos llamar o una función anónima definida
+dentro del mismo setTimeout
+setTimeout(function(){ alert("Hello") }, 3000);
+
+
+
+- setInterval()
+llama a la funcion cada determinados intervales de tiempo
+se repite por unos determinados segundos tantas veces hasta que le indiquemos que corte
+
+ESTRUCTURA:
+
+var myVar = setInterval(consoleLogFunc, 3000);
+function consoleLogFunc() {
+console.log(“Hola!”);
+};
+
+Detener función
+function detenerIntervalo(){
+clearInterval(myVar)
+};
+
+setInterval(a,b);
+a = la función que se va a ejecutar después del intervalo de tiempo definido.
+b = el tiempo que debe “esperar” antes de ejecutar la función. En milisegundos.
+El parámetro “a” es una función previamente definida que podemos llamar o una función anónima definida
+dentro del mismo setTimeout
+setInterval(function(){ alert("Hello") }, 3000);
+
+
+
+
+JQUERY
+ENLAZAR JQUERY AL HTML:
+ir a la plagina de jquery y copiar el link: https://code.jquery.com/jquery-3.6.4.min.js (o click derecho y guardar en el link ese)
+pegar link con una etiqueta script src en el head de html
+
+jquery tiene una sintaxis para seleccionar elementos html y hace acciones con ellos
+SINTAXIS:
+
+$(document).ready(function(){
+
+$("selector").accion();
+
+});
+
+los selectores pueden ser clases, id, nombre de etiqueta, *
+la sintaxis de jquery siempre va dentro del evento document ready
+
+funciones  para los elementos:
+.width()
+.height()
+.addClass()
+.append()
+.attr()
+.position()
+.remove()
+
+eventos para manipular elementos:
+.click()
+.change()
+.dbclick()
+.focus()
+.focusin()
+.focusout()
+.hover()
+
+
+animaciones y otras funciones
+.hide()
+.queue()
+.show()
+.slideDown()
+.slideToggie()
+.slideUp()
+.stop()
+.toggle()
+.fadeIn(), .fadeOut(), .fadeTo() y .fadeToggle()
+
+
+
+
+para agarrar el valor de un elemento .val()
+
+modificar cosas de css con jquery:
+ $("#aplicar").click(function(){
+                var seleccion = $("#colores").val();
+                $(".div").css("background",seleccion)
+            })
+
+
+.append() se usa desde jquery y sirve para poner contenido en el html (etiqueta)

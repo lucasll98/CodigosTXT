@@ -1,0 +1,339 @@
+PROGRAMACION WEB
+
+INTERNET es una red interconectada entre maquinas en todo el mundo, una red de redes, es descentralizada
+utiliza el protoloco (conjunto de reglas que manejan el mismo lenguaje) TCP/IP
+
+una pagina WEB es un archivo html que lee el navegador web, ese archivo html se encuentra en el servidor web que se encuentra en internet
+
+
+WORLD WIDE WEB (WWW)
+	 SOLICITUD
+SERVIDOR <-------  CLIENTE
+SERVIDOR -------> CLIENTE
+	 RESPUESTA
+
+estan conectados por una red, el cliente desde una pc pide una solicitud al servidor con su base de datos y el servidor envia la respuesta al cliente
+
+un CLIENTE son los navegadores web (chrome) el cual interpreta el documento html y lo muestra en pantalla
+
+HTML
+es lenguaje de marcado de hipertexto, se utan etiqquedas o tags
+es una ESTRUCTURA de la pagina, es el ESQEUELETO
+CSS
+hojas de estilo cascada, es el ASPECTO VISUAL de la pagina, es elmaquillaje
+colores,tamaños,imagenes,videos,tipografias,etc
+JAVASCRIPT
+es el CEREBRO de la pagina, es la parte inteligente, las FUNCIONALIDADES de la pagina
+-DINAMISMO
+.INTERACCION
+-ANIMACION
+
+
+
+HTML
+el archivo se DEBE llamar index.html
+es la estructura d ela pagina web, se utilizan etiquetas
+<html>
+	<head>
+	en el head va toda la informacion de la pagina que no es visible , por ejemplo el titulo y el meta
+	</head>
+
+	<body>
+
+	en el body va el cuerpo de la pagina y y todas las etiquedas
+
+	</body>
+
+</html>
+
+h1
+h2
+h3
+h4
+h5
+h6
+p
+div
+a
+br
+span
+em
+
+
+lista numerada
+<ol>
+	<li> item </li>
+	<li> item </li>	
+	<li> item </li>
+</ol>
+
+lista no numerada 
+<ul>
+	<li> item </li>
+	<li> item </li>	
+	<li> item </li>
+</ul>
+
+imagenes
+<img src=" "/>
+nombreCarpeta/nombreimagen.jpg
+
+hipervinculos
+
+<a href = " link pagina " target ="_blank" > nombre link </a>
+para apuntar a otra link de mi pagina nombreCarpeta/nombrepagina.html
+
+ID Y CLASS
+son atributos de etiquetas, el id no se puede repetir en otra etiqueta, el class si
+ejemplo:
+<p id="parrafo1" > parrafo </p>
+<a href ="#parrafo1" > ir al parrafo 1 </a>
+
+TABLAS
+<table border ="2px solid black"> 
+	<tr>
+		<th> videojuego </th>
+		<th> categoria </th>
+	</tr>
+	
+	<tr> fila
+	
+		<td> uncharted 4 </td>
+		<td> aventura </td>
+	</tr>
+
+
+</table>
+
+
+ETIQUETAS SEMANTICAS PARA LA ESTRUCTURA DE LA PAGINA
+
+<header>
+<nav>
+<main>
+<section>
+<article>
+<aside>
+<footer>
+
+
+FORMULARIO HTML
+el form agarra datos del cliente  ylo envia a la base de datos
+estructura:
+
+<form method="post">
+	<label for"nombre"> Ingrese nombre </label>
+	<input type ="text" name="nombre" placeholder="Ingrese nombre y apellido" >
+	<input type ="submit">
+
+</form>
+
+tipos de inputs:
+text   : se puede ingresar texto
+number  : se puede seleccionar un numero
+radio   : se puede sleccinar solo uno, y es redondo
+checkbox  : se pueden seleccionar muchos
+password  : se ingresa  la contraseña y la oculta visualmente
+email
+tel
+fecha  : se puede sleeccionar una fecha
+color  : se puede teleccionar un color
+url  :
+datalist
+descripcion
+submit: es un boton para enviar todos los datos
+
+PARA ELEGIR MUCHAS OPCIONES DENTRO DE UN INPUT
+el select en input es el que contiene las options por ejemplo:
+
+<select name="provincia">
+	<option value="bsas">Buenos Aires </option>
+	<option value="cordoba">Cordoba </option>
+</select>
+
+atributos de inputs
+id: para identificarlo
+name: los input sin el atributo name no son enviados
+required: el campo del input tiene que ser completado para poder enviar el form
+multiple:
+placeholder: se puede poner un texto casi transparente dentro del input, el label podria ser omitido
+checked: por defecto esta tildado el check
+
+pregunta con radio
+<label for="si"> SI </label>
+<input type="radio" value="si" name="estudiante>
+<label for="no"> NO </label>
+<input type="radio" value="no" name="estudiante>
+
+
+CLASES
+es un atributo de html, se puede poner muchas clases dentro de un atributo clase, por ejemplo:
+<div class ="contenedor contenedorPrimero"> </div>
+por ejemplo es un contenedorPrimero que pertenece a la clase contenedor
+
+CSS
+es estilos en cascada
+importarlo al html:
+en el head: <link href="nombreArchivo.css">
+
+general:
+*{
+	propiedad:valor;
+}
+por etiqueta:
+selector{
+	propiedad: valor;
+}
+
+por clase:
+.nombreClase{
+	propiedad:valor;
+}
+
+por id:
+#nombreId{
+	propiedad:valor;
+}
+
+propiedades:
+background
+color
+padding
+margin
+font-size
+font-family
+
+
+POSITION
+static
+relative
+absolute
+fixed
+z-index
+
+
+static: es la propiedad position que esta por defecto, se puede mover y no conserva el lugar de origen
+relative: se puede mover la caja guardando su lugar de posicion original, se usa para animaciones por ejemplo
+absolute: se puede mover la caja, pero al moverlo no toma los elementos html, sino que se mueve con respecto a la pantalla, con respecto al bodyde la pagina
+fixed:se queda fijado en la pantalla, aunque se scrollee sigue ahi clavado
+z-index: esta propiedad le da jerarquia a la caja, se superpone por arriba de las otras que no tienen o tienen z-index inferior
+
+unidades de medida:
+px
+em 1 em es 16px
+rm
+
+
+DISPLAY:FLEX
+el flex es una propiedad de display que se aplica a la clase contenedora de los elementos y modifica los elementos. los items se adaptan ajustando su tamaño
+justify-content (eje horizontal): space-around / space-between
+align-items(eje vertical): flex-start / center / flex-end / stretch
+align-content(cuando hay varias filas)
+flex-direction: row/row-reverse/column/column-column-reverse
+flex-wrap: wrap/no-wrap/wrap-inveverse/nowrap
+
+propiedades para items:
+align-sef : auto/center/start/top/bottom/end/baseline
+order(cambiar el orden de los items):
+flex-grow(cambia el tamaño del item)
+flex-basis(establece un valor inicial de ancho y alto)
+flex-shrink(se contrae)
+
+
+
+
+
+OBTENER EL VALOR DE ELEMENTOS HTML por etiqueta
+var/let nombreVariable = document.getElementByTagName("nombreEtiqueta");
+
+OBTENER EL VALOR DE ELEMENTOS HTML por atributo nombre
+var/let nombreVariable = document.getElementByName("nombre");
+
+OBTENER EL VALOR DE ELEMENTOS HTML por id
+var/let nombreVariable = document.getElementById("nombreiId");
+
+OBTENER EL VALOR DE ELEMENTOS HTML POR CLASE
+var/let nombreVariable = document.querySelector(".nombreClase");
+vaar/let nombreVariable = document.getElementByCLASSnAME("NombreClase");
+
+
+
+
+CREAR ELEMENTOS HTML DESDE JS
+let elementoHtml = document.createElement("div");
+let contenido = document.createTextNode("Hola esto es un div");
+elementoHtml.appendChild(contenido);   ---->el append child combina elos dos elementos
+document.body.appendChild(elementoHtml);  ----> este lo agrega al html
+
+
+
+EVENTOS
+los eventos son los medios que el usuario tiene para interactucar con la pagina (clickear, tocar un boton, apretar una tecla)
+
+MANEJAR EVENTOS
+hay 2 formas de manejar eventos, una es:
+poniendo el onClick o poniendp el addEventListener
+con onClick:
+en el elemento html que se le quiere poner el evento onClick como atributo:
+onClick=(nombreFunction());
+
+con addEventListener
+let boton = document.getElementById("boton")
+
+boton.addEventListener("click",function(){
+	...
+});
+
+
+INNER HTML
+con inner html se puede modificar un elemento y escribirlo tipo html
+parrafo.innerHTML = "<p> este es un nuevo parrafo modificado con inner HTML </p>"
+
+
+tipos de eventos:
+-click
+-dblclick
+-focus
+-submit
+-reset
+-change
+-key
+-keyup
+-keypress
+-keydown
+-load
+-unload
+-resize
+
+
+VALUES
+para capturar el valor de un elemento por ejemplo del form como un input se usa el values
+var/let nombreVariable = document.getElementById("nombreiId").value;
+
+STYLE
+para modificar tipo css
+document.getElementById("titulo").style.propiedadCss = "valor";
+nombreVariable.style.display = "none";
+nombreVariable.style.background = "red";
+
+CLASES
+agregar una clase
+elemento.classList.add("clase");
+elimina una clase
+elemento.classList.remove("clase");
+
+sessionStorage ---> no guarda el dato mientras cierre la sesion
+localStorage ---> guarda el dato mientras se cierre la sesion
+
+BORRAR ELEMENTOS HTML DESDE JS
+let elementoABorrar = document.getElementById("nombreId");
+elementoABorrar.parentNode.removeChild(elementoABorrar);
+
+
+OBTENER EL HREF DE UN a (tambien es un ejemplo de obtener atributos de un elemento html)
+let elementoEnlace = document.getElementById("nombreId");
+elementoEnlace.href
+
+expreciones regulares
+expresionRegular.test(valorAevaluar);
+

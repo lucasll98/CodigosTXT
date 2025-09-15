@@ -1,0 +1,526 @@
+CSS
+
+poner en el head del html (para enlazar y conectar el html (estructura) con el css(personalizacion de la interfaz):
+<link rel="stylesheet" type="text/css" href="estilo.css">
+
+En un nuevo proyecto/ archivo hacer el estilo.css
+
+SELECTOR ESTRUCTURA: 
+
+selector{
+
+	propiedad:valor;
+	
+}
+
+
+SELECTOR PARA SELECCIONAR TODOS LOS ELEMENTOS
+
+*{
+
+	propiedad: valor;
+
+}
+
+SELECTOR PARA ETIQUETAS
+tipoDeEtiqueta{
+
+	propiedad:valor;
+
+}
+
+SELECTOR ID (es mejor porque tiene mas jerarquia)
+en css:
+#nombreDeID{
+
+		propiedad:valor;
+
+}
+en html:
+en la etiqueta del html poner como atributo id="nombredeID"
+
+SELECTOR POR ATRIBUTO
+en HTML:
+creamos un atributo en la etiqueta, con un nombre que queramos: nombreAtributo=""
+en CSS:
+
+[nombreAtributo=""]{
+
+		propiedad:valor;
+
+}
+
+EL ATRIBUTO STYLE SE USA EN HTML Y ES MAS IMPORTANTE QUE CUALQUIER SELECTOR
+va como atributo en la etiqueta 
+style="propiedad:valor"
+
+
+TIPOGRAFIA
+va dentro de cada selector a eleccion
+
+selector{
+
+	font-family: tipo-de-fuente;
+	color: orange;    
+	font-size: 1.5em;    -----> tamaño de la letra, acompañado de la unidad de medida, puede ser px, pero se recomienda em, para que sea reactive design(diseño adaptado a pc y celular)
+	line-height: 2;     ---->  destancia de los renglones
+	font-weight: 100;   ----> peso/grosor de la letra
+	
+}
+
+Para poner una fuente de google fonts hay que copiar el link que tiene el href y pegarlo en el head del html, despues en el selector del css poner: font-family: 'nombre de la fuenta'; o pegar el link de google fonts que dice css
+
+NORMALIZE
+poner el normalize en el html con el <link y en el href poner "normalize.css" para importalo.
+
+en el normalize agregar:
+
+ *{
+
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+
+ }
+
+img {
+  border-style: none;
+  max-width: 100%;
+}
+
+
+
+PROPIEDADES DE CAJAS
+
+selector (caja){
+	background: color;  ------> es para agregarle color al fondo de la caja
+
+	padding-left: 20px;
+	padding-bottom: 20px;   ----->  es para agregarle espacio o sacarle espacio entre la letra y el espacio en blanco, es como una sangria
+	padding-top: 20px;
+	padding-right: 20px;
+
+	display: inline-block;  ----> es para hacer la caja chica, no ocupa todo el ancho
+
+	box-sizing: border-box; ----> es para que la caja no se deforme ya que le dimos nuestras medidas
+
+	height: 150px;    ---->alto de la caja
+	width: 150px;    ----> ancho
+
+	text-align: center;  ------> centra el texto en la caja;
+
+	
+	margin-left: 20px;
+	margin-bottom: 20px;   ----->  es para agregarle espacio o sacarle espacio entre las cajas
+	margin-top: 20px;
+	margin-right: 20px;
+	
+	border-radius: 15px; ------> es para darle borde en los angulos a las cajas
+	border-radius: 50%; -----> le agrega un borde que lo hace un ciruclo a la caraj
+	border: 3px solid black; ----> le agrega un contorno a la caja
+	border: 3px inset grey; -----> le da una sombra el inset al contorno
+
+	box-shadow: 5px 5px 50px 10px black;   -----> le agrega sombra al contorno de la caja
+	text-shadow: 2px 2px 6px white;   -----> le agrega sombra al texto
+	transform: rotate(5deg);  -----> para rotar la caja
+
+	opacity: 1px;  ----> le da opacidad a la caja
+
+}
+
+
+
+BORDER VS OUTLINE
+son comandos para marcar el contorno/borde de una caja, los bordes le sacan px a las cajas, lo hacen mas chicas, mientras que outline no, ambos se escriben igual
+
+POSITION RELATIVE
+va en el selector de css y es para las cajas, conserva el lugar no importa que la corras
+GUARDA EL ESPACIO ORIGINAL, NO IMPORTA SI LA CAMBIAS DE LUGAR, GUARDA EL LUGAR ORIGINAL Y EL ACTUAL
+position: relative;
+top: 10px;
+left: 10px;
+
+
+Z- INDEX
+va en el selector y es para las cajas, le da jerarquia a las cajas, todas las cajas tienen z-index por defecto en 0, si le pones a a una caja z-index: 1; va a superponerse a la otra
+
+DIV/CAJAS POR PADRE/ HIJO
+el hijo siempre va a estar por encima del padre, ni aunque le pongamos position relative o z index al padre.
+la unica forma de que el padre se ponga encima del hijo es ponerle un z-index:-1; al hijo
+<div class="padre"> padre
+			<div class="hijo"> hijo</div>
+	</div>
+
+
+POSITION ABSOLUTE
+ES LO CONTRARIO A RELATIVE, LA CAJA MIENTRAS LA MOVAMOS NO GUARDA EL ESPACIO Y LUGAR ORIGINAL
+
+
+
+
+POSITION FIXED
+es para fijar algo en la pantalla, si scrolleamos sigue fijo en la pantalla y no se mueve
+va en el selector
+position:fixed; SE USA PARA LOS MENUS DE GOOGLE, LA BARRITA DE ARRIBA, TWITTER YOUTUBE ETC
+
+body{
+	padding-top: 100px;
+}
+
+.caja-fixed{
+	background: red;
+	position: fixed;
+	margin: 0px;
+	top: 0;
+}
+
+POSITION STICKY
+es como el fixed pero parecido
+.caja-sticky{
+
+	background: green;
+	position: sticky;
+	top: 0px;
+	margin-top: 100px;
+}
+
+IMPORTANTE: LOS BLOCKS/BLOQUES CUBREN TODO EL ANCHO DE LA PANTALLA(P, H1,H2, ETC), LOS EN LINEA/IN LINE, CUBREN SOLO UNA PARTECITA(DIV, B)
+LOS INLINE-BLOCK ES UNA MEZCLA DE LOS DOS, SE LE PUEDE DAR UN ANCHO Y UN ALTO
+
+EN INLINE no se puede cambiar las resoluciones de la caja
+en block si
+En inline-block se ponen en linea y se pueden cambiar las resoluciones
+
+
+CAMBIAR DE INLINE A BLOCK
+display:block;
+CAMBIAR DE BLOCK A INLINE
+display:inline;
+
+
+CUANDO HAY MUCHO TEXTO DENTRO DE UNA CAJA Y SE PASA DEL LIMITE, HAY QUE PONER OVERFLOW
+en el selector en css poner overflow=auto;
+
+PSEUDOELEMENTOS de texto
+se usa en selector de css aparte, y es para modificar elementos
+se pone el nombre de la class / etiqueta, y dos :: y despues el pseudoelemento
+estructura:
+.nombre::first-letter(propiedad a modificar){
+
+}
+
+
+
+.texto-pseudo::first-line{
+	font-size: 1.3em;
+	color: yellow;
+
+}
+
+.texto-pseudo::first-letter{
+	font-size: 2em;
+	color: red;
+}
+
+
+
+no funciona en inline
+
+
+
+INPUT con pseudoelemento placeholder:
+<input type="text" name="" required="" placeholder="Inicie Sesión">
+
+div input{
+	padding: 10px;
+	margin-top: 100px;
+	margin-bottom: 25px;
+}
+
+input::placeholder{
+	
+	font-family: 'Josefin Sans', sans-serif;
+	color: red;
+
+}
+
+SELECTION pseudoelemento
+se usa para cuando marcamos un texto, para cambiar el color del pintado
+
+.seleccionador-pseudo::selection{
+	color: white;
+	background:black;
+
+}
+
+
+PSEUDOCLASES
+son como los pseudoelementos pero es para modificar cosas visuales
+es la misma estructura que pseudoelementos pero con un solo :
+
+HOVER: se usa para modificar una caja, boton lo que sea, mientras pases el cursor por arriba
+ACTIVE: se usa para modificar una caja, boton link, lo que sea, mientras hagas click 
+
+.caja-pseudoclase{
+	background: slateblue;
+	color: black;
+	height: 200px;
+	width: 400px;
+
+	text-align: center;
+	margin: auto;
+	margin-top: 150px;
+	margin-bottom: 100px;
+	
+	transition: all 0.6s;
+
+
+}
+
+.caja-pseudoclase:hover{
+	background: darkslateblue;
+	color: white;                     ----> HOVER: cambia el color cuando pasas el cursor por arriba
+	height: 300px;
+	width: 500px;
+}
+
+.caja-pseudoclase:active{
+	background: green;
+	color: lightgreen;       ----> 	ACTIVE: cambia el color cuando se hace click
+	height: 250px;
+	width: 250px;
+}
+
+
+LINK: se  usa para cambiar el color del link cuando uno lo clickea 
+en html:
+<a class="link-pseudo" href="https://www.youtube.com/" target="_BLANK">link de youtube </a><br>
+en css:
+
+
+.link-pseudo{
+	font-size: 1.5em;
+}
+
+.link-pseudo:link{
+	color: darkblue;    ----> LINK: color del link por defecto
+}
+
+.link-pseudo:hover{
+	color: green;    ----> HOVER: color del link cuando esta el curso encima
+}
+.link-pseudo:visited{
+	color: red;     -----> VISITED: color de link cuando ya lo visitaste
+
+}
+
+INPUT FOCUS
+es para cuando se hace click, cambie de color 
+
+div input{
+	padding: 10px;
+	margin-top: 100px;
+	height: 80px;
+	width: 600px;
+	margin-bottom: 80px;
+	background: lightgrey;
+
+	transition: all 1s;
+}
+
+input::placeholder{
+	
+	font-family: 'Josefin Sans', sans-serif;
+	color: black;
+
+}
+div input:hover{
+	background: white;
+
+}
+
+div input:focus{
+
+	background: white;
+	padding: 20px;
+
+}
+
+
+colores por rgb:
+background: rgb(0,0,0)
+colores por hexadecimal
+background: #000
+
+PARA PONER EL CURSOR COMO LA MANITO
+cursor:pointer;
+
+FLEXBOX
+es para flexear cajas, es muy importante
+IMPORTANTE: TODOS LOS FLEX VAN DENTRO DEL DIV-CONTENEDOR, dentro del div contenedor se encuentran las div-cajas
+display:flex; -----> alinea las cajas como in line block;
+
+flex-direction:row; ----->las alinea en eje x
+flex-direction: ------>row-reverse; las da vuelta, es como un espejo
+flex-direction:column; ------> las alinea en eje y
+flex-direction: ------>column-reverse; las da vuelta, es como un espejo
+
+flex-wrap: wrap; -----> es para cuando se achica la pagina no le cambie la resolucion a las cajas, cuando se va achicango la pagina se van para abajo las cajas pero no pierden tamaño
+flex-wrap: wrap-reverse ----> es vez de ir abajo van arriba
+
+justify-content: center;  ------> es para centrar las cajas
+justify-content: space-around; ------> centra las cajas con mas espacio
+justify-content: space-between;  ----> centra las cajas con mucho mas espacio
+justify-content: space-evenly; ----> centra las cajas y les  da el mismo espacio
+
+align-items:flex-start----> centra las cajas arriba
+align-items:center ----> centra las cajas en el centro
+align-items:flex-end ----> centra las cajas abajo
+align-items:baseline 
+
+
+align-content es mejor que items
+
+PROPIEDADES FLEX DE LAS CAJAS DENTRO DEL CONTENEDOR
+
+
+align-self:flex-start/center/flex-end/baseline;  -----> es para acomodar una caja en particular
+margin-top/left/right/bottom: auto; -----> es para centrar la caja individual, y ponerla donde quieras, pero esta invertido
+margin:auto; -----> para centrarlo
+
+flex-grow:1; ------> completa el espacio sobrante en blanco con la caja
+flex-shrink:1; ------> es el espacio que cede la caja
+flex-basis: 20px ; -----> medicion antes de achicarse
+
+order: 1/2/3/etc.; -----> es como el z index, mientras le des mayor numero, mas jerarquia va a tener la caja, y si va a posicionar depende el axis de la cdel eje
+
+
+GRID
+display:grid; ----> se pone como bloque y cambia el contenido de la caja, lo que se encuentra dentro
+
+
+1fr; las hace flexibles a las cajas dentro de la grilla, y ocupa toda la caja
+
+PARA SELECCIONAR UNA CAJA O ALGO EN ESPECIFICO
+.nombreClaseDelElemento:first*-child{
+
+
+}
+
+*si no es el primero, poner: nth-child(numero de laa caja)
+
+minmax(150px, 1fr): es para hacer el grid dinamico y darle un minimo y un maximo el cual es el tope hasta que se pueda achicar y agrandar
+
+auto-fill: genera la cantidad de columnas/filas q pueda mientras cumpla con las propiedades, si hay espacio para q entre una caja la pone, sino no
+auto-fit: se escala, ocupa todo el espacio de la caja contenedora
+
+
+ALINEACION DE GRILLAS , CAJAS, TEXTOS, COLUMNA, FILAS, ETC
+
+justify-content: center;
+align-content: center;
+text-align: center;
+justify-items: center;
+align-items: center;
+
+
+justify-content: start/center/end  -----> justifica y centra las cajas vertical
+align-content:start/center/end    ------> justifica y centra las cajas horizontal
+
+align-self:center; ---->justifica y centa una caja en concreto
+justify-self:center;
+se puede poner: end, start, center
+
+a mayor order que se le da a una caja mayor jerarquia
+
+object-fit: cover; ----> sirve para adaptarse al contenedor
+
+
+
+
+RESPONSIVE DESIGN
+para hacer una pagina responsive se necesitan:
+-contenedores flexibles
+-usar media query
+
+se usa el @Media screen
+
+@media screen and (min/max-width: ---px){
+
+}
+
+TRANSITION
+es para darle traniciones y tiempo a los elelemtnos, hover etc
+transition-property  (se le indica la propiedad que se va a modificar en el hover) / all / none
+transition-duration (se le indica cuantos segundos va a tardar en modificarse)
+transition: all 1s (modifica toda las propiedades y se le da 1 segundo)
+transition-delay: el tiempo que va a tardar en aplicarse el hover
+
+diferentes tipos de transiciones:
+ease
+ease-in
+ease-out
+
+
+para aplicar hover a un elemento y que modifique otro elemento
+
+.elemento:hover > .otroElemento{
+
+}
+
+
+ANIMATION
+es para dqarle animaciones a la pagina
+se usa el @keyframes
+
+estructura:
+@keyframes nombreAnimacion {
+
+	from/0%{
+
+	}
+
+	50%{
+
+	}
+
+	to/100%{
+	
+	}
+
+tipos de propiedades de animaciones (VA EN EL SELECTOR DEL ELEMENTO A MODIFICAR:
+animation-name: nombreAnimacion; (nombre de la animacion, tiene q ser el mismo al keyframes)
+animation-duration: 3s; (duracion de animacion)
+animation-iteration-count: 1/infinite; (las veces que se va a repetir la animacion)
+animation-direction: normal/alternate/reverse/alternate-reverse; (es el tipo de direccion en que ira el elemento
+animation-fill-mode: both/forwards (es como va a quedar al final de la animacion el elemento)
+animation-delay: 1s; (tiempo en que tarda en iniciarse la animacion
+
+animation-timing-function: cubic-bezier (x,y, x,y); (es para darle un tiempo de animacion mas especifico, no es precindible)
+
+
+TRANSFORM
+va en el selector del elemento a modificar y lo transforma
+
+transform: translate (20px, 20px); (traslada al elemento el primero en x y el segund oen y)
+transform: scale(1); (transforma el elemento en escalas, lo agranda o lo achica segun el numero)
+transform:skew(10deg); (inclina el elemento segun el deg que se le indica)
+transform:rotate(10deg); (rota el elemento segun los grados)
+
+BACKGROUND
+background-image: url("");
+background-size: 30px/cover/contain;
+background-repeat: no-repeat/repeat;
+background-position: left top/bottom/center , right top/bottom/center;
+background-attachment:fixed; (fija la imagen de fondo mientras scrolleamos)
+linear-gradient:(color1,color2); (hace un degrade entre 2 colores)
+
+FILTER
+la propiedad filter le da un filtro y modifica la imagen
+filter:contrast()/brightness()/drop-shadow()/grayscale()/opacity()/etc; 
+
+OTRAS PROPIEDADES
+letter-spacing:10px; (es el espacio entre letras)
+scroll-behavior:smooth; (se usa para scrollear mas lindo, es importante)
+user-select:none; (el usuario no puede seleccionar)
+text-shadow: le da sombra a las letras;

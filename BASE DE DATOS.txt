@@ -1,0 +1,609 @@
+BASE DE DATOS
+-DATO: es una informacion suelta sin contexto (fecha, palabra, numeros)
+-INFORMACION: es un conjunto de datos contextualizados
+
+esa INFORMACION y esos DATOS se guardan en ARCHIVOS de tipo:
+	-texto
+	-binario 
+	-multimedia 
+estos archivos tienen problemas en su uso:
+	-redundancia
+	-falta de integridad
+	-dependencia de las apps que los utilizan
+	
+MEDIOS DE ALMACENAMIENTO:
+-FISICO:-disco duro 
+	-cinta
+	-memorias
+	-pendrive
+	-disquette,casette
+	
+-VIRTUAL:-servidor de archivos
+	-la nube (google photos, one drive, drive, etc)
+
+UNA BASE DE DATOS es un conjunto de datos almacenados en forma independiente delas apps que las utilizan
+poseen redundancia minina y permiten control de integridad y es segura
+son administradas por un sistema de gestion de base de datos (motor)
+
+ESTRUCTURA SISTEMA DE GESTION DE BASE DE DATOS
+
+ingresa una consulta/modificacion -----> entra al procesador de consultas <------> administrador de transacciones y almacenamiento  <-----> BASE DE DATOS
+
+TIPOS DE BASES DE DATOS
+-Variabilidad de los datos:
+	-dinamica (los datos pueden cambiar)
+	- estatica (los datos no cambian)
+-estructura de almacenamiento:
+	-relacional (sql)
+	-objetos
+	-documentos (no relacional)
+-otras:-geograficas
+
+PROCESO DE DISEÑO Y MODELADO
+como entrada tenemos los requerimientos en lenguaje natural
+sehace un analisis de esos requerimientos y se diseña y se obtiene un modelo conceptual
+el modelo conceptual es un dibujo y un diagrama
+una vez que se proceso y pasamos al modelo logico pasamos al modelo fisico
+el modelo fisico son archivos interpretados por el motor
+asi se pueden generar consultas para que se puedan hacer cosas con nuestros datos
+en el modelo logico se le aplica la normalizacion para garantizar la redundancia minima y la integridad referencial
+requerimientos ---->modelo conceptual----> modelo logico----->modelo fisico
+
+
+
+modelo relacional
+-relacion: tabla
+-tupla:fila:registro
+-atributo:columna:campo
+
+-restricciones de integridad
+	-clave primaria
+	-clave foranea
+
+-lista de tablas
+Tabla1(Campo1, Campo2,...)
+
+regla 1
+las entidades fuertes son nueva tabla y cada atributo es un nuevol campo
+los atributos id son los campos con clave primaria (se subraya)
+puede ser simple un campo o compuesta dos o maas
+
+regla 2 relaciones unarias / binarias
+en las relaciones 1:N se agregara en la tabla de N todas las claves primarias de del lado del 1
+todos estos campos formaran una clave foranea
+se subrara lacon linea punteada
+puede ser simp,e o compuesta
+se debe definir una lista de claves foraneas dobsw ase indica  cada clave a que tabla referencia
+garantiza que los vfalores referenciados por la clave exiten en laa tabla destino
+
+TablaOrigen.Campo -> TablaDestino.Campo
+
+regla 3 - relaciones N:N
+se debe crear unz nueva tabla con un nombre de sustantivo entre las dos entidades N N
+
+los campos van a ser las claves primareas que adenas son foraneas
+
+la clave primaria de la nueva tabla va a ser compuesta por las claves primarias oriignales de ambas entidades
+
+las claves foraneas van a ser
+ alquiler.cod_pel -> pelicula.cod_pel
+alquiler.tipo_doc + nro_doc -> cliente.tipo_doc + nro_doc
+
+INGENIERIA INVERSA
+es el pasaje de MR a der
+
+es un proceso con  multiples resultados
+da perdida y ambiguedad
+
+NORMALIZACION
+miniminiza la redundancia e inconsistencia
+pero aumenta la complejidad
+se busca la redundancia minima
+se aplica en el MR
+
+-dependencias funcionales
+campoDependenciaFuncional -> campoQueDepende
+
+
+
+SQL
+es el lenguaje de programacion para hacer la parte "fisica"
+sqlfiddle ---> es una web que genera una base de datos para que podamos trabajar directamente
+SQL ES UN LENGUAJE DE CONSULTA ESTRUCTURADA
+y tiene varios sublenguajes
+	-DDL(lenguaje de definicion de datos): nos permite crear estructuras, sus palabras reservadas son CREATE,ALTER,DROP,TRONCATE
+	-DML(lenguaje de manipulacion de datos):nos permite malipular datos generando sentencias (crear eliminar modificar etc) sus palabras reservadas son SELECT,INSERT, UPDATE,, DELETE
+
+tipos de datos:int,Integer,decimal(m,d),float,double,tinyint(es como boolean),date(yyyy-mm-dd),time(hh:mm:ss), datetime (yyyy-mm-dd hh:mm:ss), char(m), varchar(m)(guarda una cadena de caracteres variable), text(no puede ser unique),blob (objeto binario grande, es para guardar archivos, pdfs, videos,etc),
+
+-SENTENCIAS DDL
+estructura:
+palabra reservada opcion1 | opcion2 [opcional] <nombre>;
+
+creacion de una base de datos
+create database | schema[if not exists] <nombre>;
+
+borrar base de datos
+drop database | schema [if exists] <nombre>;
+ 
+usar x cosa o base de datos	
+use <nombre>;
+
+ejemplo:
+CREATE SCHEMA IF NOT EXISTS universidad;
+DROP DATABASE universidad;
+USE universidad;
+
+
+cracion de tablas
+create table <tabla>
+(<campo_1><tipo_dato1>[restricciones_campo1],......[restricciones_tabla]);
+las restricciones de tabla aplican a toda la ts+abla y no solo a un campo
+
+ejemplo tabla
+CREATE TABLE alumnos (legajo  SMALLINT, nombre VARCHAR(40), apellido VARCHAR (40), fecha_nacimiento DATE);
+el 40 es por maximo 40 caracteres y smallint es un entero chiquito
+
+restricciones de campo
+-not null
+-primary key (claves primarias simples)
+-unique (claves unicas simples)
+-auto_increment (tipos numericos,debe ser pk, solo puede haber una)
+-default <valor>
+
+CREATE TABLE alumno (legajo  SMALLINT, nombre VARCHAR(40) NOT NULL, apellido VARCHAR (40) NOT NULL, fecha_nacimiento DATE);
+
+restricciones de tabla
+[CONSTRAINT <nombre>] PRIMARY KEY (<lista_campos>)
+[CONSTRAINT <nombre>] FOREIGN KEY (<lista_campos>) REFERENCES <tabla_ref>(<lista_campos_ref>)
+[CONSTRAINT <nombre>] UNIQUE (<lista_campos>)
+[CONSTRAINT <nombre>] INDEX (<lista_campos>)
+
+ejemplo
+CREATE TABLE tipo_documento (tipo CHAR(3) PRIMARY KEI, descripcion VARCHAR(50));
+CREATE TABLE alumno (tipo_documento CHAR(3), numero_documento VARCHAR(15), nombre VARCHAR(40), apellido VARCHAR (40) NOT NULL, fecha_nacimiento DATE, CONSTRAINT alumno_pk PRIMARY KEY  (tipo_documento,numero_documentoo), FOREIGN KEY (tipo_documento) REFERENCES tipo_documento(tipo));
+
+borrar tablas
+DROP TABLE <tabla>
+modificar tablas
+ALTER TABLE <tabla> ADD COLUMN <campo> <tipo_dato>
+[RESTRICCIONES_CAMPO];
+borrar columna
+ALTER TABLE <tabla> DROP COLUMN <campo>;
+cambiar campo
+ALTER TALBE <tabla> CHANGE <nombre_campo_viejo> <nombre_campo_nuevo> <tipo_dato> [restricciones_campo];
+
+modificacion de restricciones
+ALTER TABLA <tabla> ADD PRIMARY KEY (<lista_campos>);
+borrar primary key
+ALTER TABLE <tabla> DROP PRIMARY KEY;
+agregar restricciones
+ALTER TALBE <table> ADD [CONSTRAINT <nombre>] UNIQUE|INDEX(<linda_campos>);
+ALTER TABLE <tabla> DROP INDEZ <nombre> (borra unique e index)
+ALTER TABLE <tabla> ADD [CONSTRAINT <nombre>] FOREIGN KEY (<lista_campos>) REFERENCES <tabla_ref> (<lista_campos_ref>);
+
+
+SELECT SIMPLE : es consultar sobre una sola tabla
+estructura consulta
+SELECT[DISTINCT] * | <lista_campos>
+FROM <lista_tablas>
+[WHERE <condicion>]
+[GROUP BY <lista campos agrupamiento>]
+[HAVING <condicion post agrupamiento>]
+[ORDER BY <lista campos orden>];
+
+select: mostrame todos estos campos
+from: desde donde saca los datos el motor
+where: que condiciones deben cumplirse, son filtros que permiten comparaciones li
+group by: agrupa la data de salida
+having: agrupa la data de salida tambien, son pareja
+order by: ordenar los datos resultados
+
+listar,mostrar,reportar,seleccionar ---->select
+
+
+ejemplo:
+listar el nombre de todos los empleados
+SELECT nombre
+FROM Empleado;
+
+ALIAS SELECT
+<campo1> [[AS]Alias1], ...
+ejemplo 2:
+listar el nombre y numero de todos los empleados
+SELECT nombre,nro AS numero
+FROM Empleado;
+
+ejemplo 3:
+listar todos los datos de todos los empleados
+SELECT *
+From Empleado;
+
+ejemplo 4:
+listar nombre d elos empleados , ordenados por sueldo
+FROM Empleado
+SELECT nombre
+ORDER BY sueldo;
+
+ejemplo 5:
+ORDER BY ASC DESC
+<campo1> [ASC | DESC], ...
+listar el nombre d elos empleados ordenados por sueldo, y para mismo sueldo ordenar por antiguedad mostrando a los mas nuevos primero
+FROM Empleado
+SELECT nombre
+ORDER BY sueldo, f_ingreso DESC;
+
+WHERE: se hacen  comparaciones es como el if
+<
+>
+=<
+>=
+!=
+!
+<>
+=
+conectores AND Y OR
+
+ejemplo 6:
+listar numero y nombre de empleados con sueldo mayor a 3k
+FROM Empleado
+SELECT nro AS numero, nombre
+WHERE sueldo > 3000;
+
+ejemplo 7:
+listar numero y nombre d emepleados con sualdo menor a 8k y cuyo nombre sea pedro
+FROM Empleado
+SELECT nro AS numero, nombre
+WHERE sueldo < 8000 AND nombre = 'Pedro';
+
+ejemplo 8:
+listar nombre de empleados que ingresaron en el año 2008
+FROM Empleado
+SELECT nombre
+WHEREf_ingreso BETWEEN '2008-01-01' AND '2008-12-31';
+
+operador BETWEEN
+<campo> [NOT] BETWEEN <desde> AND <hasta>
+
+ejemplo 9
+listar nombre de empleados sin jefe
+FROM Empleado
+SELECT nombre
+WHERE nro_jefe = IS NULL;
+
+operador IS NULL
+<campo> IS [NOT] NULL
+
+ejemplo 10
+listar nombre y sueldo de empleados cuyo nombre  comienza con la letra A
+FROM Empleado
+SELECT nombre, sueldo
+WHERE nombre LIKE 'A%';
+
+operador LIKE
+<campo> [NOT] LIKE <patron>
+el patron es una cadena de caracteres como stirng:
+	% ninguno uno, o muchos caracteres
+	_ uno y solo un caracter
+	ejemplos: 'A%' comienza con A
+		'%s' termina con s
+		'%ana' contiene ana
+		'_s_' tiene una s intermedia
+
+
+ejercicio 11
+listar nombre y sueldo de los empleados de numero 1,2,5,7 y 9
+FROM Empleado
+SELECT nombre, sueldo
+WHERE nro IN(1,2,5,7,9);
+
+operador IN
+<campo> [NOT] IN (lista_valores)
+		
+ejercicio 12
+listar numero de aquelos empleados que sean jefe
+FROM Empleado
+SELECT DISTINCT nro_jefe
+WHERE nro_jefe IS NOT NULL;
+
+DISCTINCT no admite duplicados
+
+
+SELECT
+ejercicio 1
+listar nombre y descripcion de especialidad de todos os empleados
+SELECT Empleado.nombre, Especialidad.descripcion
+FROM Empleado, Especialidad
+WHERE Empleado.cod_esp = Especialidad.cod_esp   ---> la pk de empleado y la defk de especialidad son iguales
+
+
+JUNTA es combinar las tablas
+y se usa Tabla.campo
+
+JUNTA IMPLICITA
+Producto cartesiano en el FROM (las tablas a juntar) + condicion de junta en el WHERE 
+
+ejemplo: listar nombres de empleados y descripcion de especialidad
+SELECT Empleado.nombre, Especialidad.descripcion
+FROM Empleado, Especialidad
+WHERE Empleado.cod_esp = Especialidad.cod_esp;
+
+JUNTA EXPLICITA (JOIN)
+-JOIN
+-LEFT JOIN
+
+estructura:
+EN EL SELECT VAN LAS TABLAS A JUNTAR
+VA EN EL FROM:tabla1 JOIN tabla2 ON condicionDeJunta
+ejemplo:
+SELECT Empleado, Especialidad
+FROM Empleado.nombre JOIN Especialidad.descripcion ON Empleado.cod_esp = Especialidad.cod_esp
+LA FK VA A LA IZQ, LA PK A LA DERECHA
+
+ejercicio listar el nombre de aquellos empleados que trabajan en el area de codigo A1:
+SELECT Empleado.nombre
+FROM Empleado JOIN Trabaja ON Empleado.nro = Trabaja.nro_emp;
+WHERE Trabaja.cod_area = 'A1';
+
+ejercicio listar el nombre de todos los empleados con el nombre de sus jefes
+SELECT EMP.nombre, J.nombre jefe
+FROM Empleado EMP JOIN Empleado J ON EMP.nro_jefe = J.nro;
+
+
+
+EL LEFT JOIN RESPETA LA TABLA QUE ESTA PRIMERA, ES COMO LA PRINCIPAL
+LEFT JOIN
+en el left join quedan todos los datos de la tabla que este a la izquierda, la junta con la tabla 2 y muestra los resultados que encuentra de la tabla 2 y cuando no hay coincidencia completa con  null
+tabla1 LEFT JOIN tabla 2 ON condicionDeJunta
+va en el FROM
+
+ejercicio listar nombre de todos us empleados. indicar ademas el nombre de su jefe si es que tiene
+SELECT EMP.nombre, J.nombre
+FROM Empleado EMP LEFT JOIN Empleado J ON EMP.nro_jefe = J.nro;
+
+ejercicio listar nombre de los empleados que trabajan en el area de descripcion Area 1 que cobran mas de 5k
+SELECT EMP.nombre
+FROM Empleado EMP
+JOIN Trabaja T ON T.nro_emp = EMP.nro
+JOIN Area A ON T.cod_area = A.cod_area;
+WHERE A.descripcion LIKE 'Area 1' AND EMP.sueldo > 5000;
+
+si hay 2 atributos con el mismo dato se usa DISTINCT para diferenciarlos y no admite repetidos
+
+
+
+Funciones de agregacion
+
+-COUNT (campo)  --->permite contar los registros
+EL COUNT VA EN EL SELECT !!!!!!!!!
+
+-MAX(campo) --->obtiene el maximo
+-MIN(campo) ---> obtiene el minimo
+-SUM(campo) ---->suma
+-AVG(campo) ---->hace el promedio
+
+ejercicio
+indicar la cantidad de empleados y el sueldo maximo
+SELECT COUNT(*), MAX(sueldo);
+FROM Empleado;
+
+ejemplo 2
+cuantos empleados tienen sueldo mayor a 3000
+SELECT COUNT(*)
+FROM Empleado;
+WHERE sueldo > 3000;
+
+ejemplo 3
+indicar el sueldo minimo de los empleados por cada codigo de especialidad
+SELECT cod_Esp, MIN (sueldo)
+FROM Empleado
+GROUP BY cod_esp;
+
+HAVING SE APLICA A EL GROUP BY
+EL WHERE SE APLICA COMPLETO AL FROM
+siempr eq tneg auna snentencia con funciones de agrupacion y goup by solo puedo poner en el select un subconjunto que pueda poner en el group by mas 
+
+ejemplo 4
+indicar sueldo minimo de los empleados por cada codigo de especialidad, solo para aquellas especialidades cuyo minimo sea mayor a 30000
+SELECT cod_esp,MIN(sueldo)
+FROM Empleado
+GROUP BY cod_esp
+HAVING MIN (sueldo)>3000;
+
+ejemplo 5
+indicar el sueldo minimo de los empleados por cada codigo de especialidad en donde aquellas especialidades qe voy a mostrar tengan mas de 5 empleados
+SELECT cod_esp, MIN(sueldo)
+FROM Empleado
+GROUP BY cod_esp
+HAVING COUNT (*) >5;
+
+ejemplo 6
+indicar cantiad de empleados por cada descripcion de especialidad
+SELECT ES.descripcion,COUNT(*)
+FROM Empleado EM JOIN Especialidad ES ON EM.cod_Esp = ES.cod_Esp
+GROUP BY ES.descripcion
+
+ejemplo 9
+cuantos jefes hay
+SELECT COUNT (DISTINCT nro_jefe)
+FROM Empleado;
+
+
+INSERT UPDATE DELETE
+
+INSERT INTO Tabla
+(campo1, campo2,campo3, etc)
+VALUES (valorCampo1, valorCampo2, valorCampo3, etc),
+	(valorCampo1, valorCampo2, valorCampo3, etc),
+	(valorCampo1, valorCampo2, valorCampo3, etc);
+
+ejemplo SELECT para copiar una tabloa
+SELECT * into Empleados_copia
+FROM (SELECT * from Empleados) copia
+
+UPDATE actualiza una tabla
+UPDATE Tabla
+SET campo1 = valor1,
+    campo2 = valor1,
+WHERE condicion;
+
+ejemplo update: al empleado 5 se le modiica su especialidad a la de codigo 3
+UPDATE Empleado
+SET cod_esp = 3
+WHERE nro = 5;
+
+ejemplo update incrementar 1k el sueldo de todos los empleados
+UPDATE Empleado
+SET sueldo = sueldo +1000;
+
+DELETE
+DELETE FROM Tabla
+WHERE condicion;
+
+ejemplo delete eliminar todos los empleados cuyo nombre comienzan con A
+DELETE FROM Empleado
+WHERE nombre LIKE 'A%';
+
+
+
+SUBCONSULTAS/CONJUNTOS
+ejercicio 1 lista rnombres de los empleados que trabajan en algun area que terminan con la letra S
+SELECT EMP.nombre
+FROM Empleado EMP JOIN Trabaja T ON T.nro_emp = EMP.nro JOIN Area A ON T.cod_area = A.cod_Area
+WHERE A.descripcion LIKE '%S'
+GROUP BY EM.nro, EM.nombre;
+se le agrega el group by para que  no haya reepetidos
+
+EN LA SUBCONSULTA SE UTILIZA IN, EXISTS
+IN + SUBCONSULTA
+se comparan los campos
+EL EXISTS DEVUELVE VERDADERO O FALSO
+verdadero:la subconsulta retorna algun registro
+falso: la subconsulta no retorna registro
+se puede aplicar NOT EXISTS
+ejercicio con exists
+SELECT EM.nombre
+FROM Empleado EM
+WHERE EXISTS (SELECT 1
+		FROM Trabaja T JOIN Area A ON T.cod_area = A.cod_area
+		WHERE A.descripcion LIKE '%S'
+		AND EM.nro = T.nro_emp);
+
+SUBCONSULTA POR VALOR
+debe devolver un solo campo, los 2 datos a coincidir deben ser del mismo valor, y debe retornar un unico registro
+ejercicio 2 listar los nombres d elos empleados que ganan el sueldo maximo
+FROM Empleado EM
+SELECT EM.nombre
+WHERE sueldo = (SELECT MAX (EM2.sueldo)
+		FROM Empleado EM2);
+
+ejercicio 3
+indicar la descricion de aquellas areas sin empleados asignados
+SELECT A.descripcion
+FROM Area A
+WHERE NOT EXISTS (SELECT 1
+		FROM Trabaja T
+		WHERE T.cod_area = A.cod_area);
+otra forma:
+SELECT A.descripcion
+FROM Area A
+WHERE A.cod_area NOT IN (SELECT T.cod_area 
+			FROM Trabaja T);
+
+
+ejercicio 4 (division)
+listar el nombre de empleados que trabajan en todas las areas de la empresa
+SELECT EM.nombre
+FROM Empleado EM    --->tabla1 : N
+WHERE NOT EXISTS (SELECT 1 
+		FROM Area A   --> tabla2: N
+		WHERE NOT EXISTS (SELECT1
+				FROM Trabaja T
+				WHERE T.nro_emp = EM.nro			-->esta es la tabla N/N
+				AND T.cod_area = A.cod_area));
+
+dame los nombres de todos los empleados, donde no exista area, ni que este en trabaja
+
+
+UNION y UNION ALL
+union no acepta duplicados, los reemplaza, el union all si
+los campos de los select deben ser del mismo tipo
+ejemplo
+SELECT A.nro
+FROM A
+UNION ALL
+SELECT B.nro
+FROM B
+
+
+VISTAS 
+se usa para VER datos
+se usa para mostrar algun requerimiento pero no todo el modelo y estas vistas funcionan como tablas virtuales
+se puede usar en cualquier FROM
+-el objeto se crea por unica vez o se actualiza
+-el resultado  se evalua en cada uso
+-algunas bd almacenan temporalmente el resultado cache
+-se utiliza unicamente en operaciones de lectura
+-UNICAMENTE SE VEN LOS RESULTADOS QUE PUSISTE EN LA CONSULTA DE LA VISTA
+- simplifica consultas de uso comun
+-proteje oculta datos (filas columnas)
+
+estructura VISTAS
+CREATE [OR REPLACE] VIEW nombre_vista AS 
+SELECT .... etc
+
+
+ejemplo 1
+CREATE VIEW EmpleadoSinJefe AS
+SELECT *
+FROM Empleado
+WHERE nro_jefe IS NULL;
+
+
+
+TRANSFERENCIA
+es un conjunto de consultas sql que debe ejecutarse en forma atomica en la bd
+se ejecutan todas o no se ejecuta ninguna
+se usa 3 comandos:
+-BEGIN TRANSACTION   ---> empieza la transaccion
+-COMMIT TRANSACTION   ---> termina la transaccion
+-ROLLBACK TRANSACTION ---> vuelve todo para atras
+
+ejercicio juan transfiere $200 a pedro
+
+BEGIN TRANSACTION
+UPDATE Cuenta
+SET sueldo = sueldo - 200
+WHERE Cuenta.nro = 1000;
+
+UPDATE Cuenta
+SET sueldo = sueldo + 200
+WHERE Cuenta.nro = 1001;
+
+INSERT INTO Transferencia (id,fecha,nro,origen,destino,importe)
+VALUES(3,20061998,1000,1001,200)
+COMMIT TRANSACTION
+
+CUANDO HAY UN UPDATE SIEMPRE HAY QUE METER UN INSERT INTO PARA ACTUALIZAR LA TABLA
+
+
+
+
+
+CONTRA SQL SERVER: root
+
+
+CREATE SCHEMA IF NOT EXISTS Universidad;
+USE universidad;
+
+CREATE TABLE Alumno (id SMALLINT, nombre VARCHAR(40), telefono INT);
+CREATE TABLE Instructor (id SMALLINT, correo VARCHAR (60))
+CREATE TABLE Curso (codigo SMALLINT, cuota SMALLINT, nombre VARCHAR, duracion ... )
+CREATE TABLE Telefono (id SMALLINT , telefono INT);
+CREATE TABLE Cursada (id SMALLINT , codigo SMALLINT);
+
+ 
+
+
+CREATE SCHEMA IF NOT EXISTS practicaClasePresencial;  USE practica;    CREATE TABLE almacen(nro SMALLINT PRIMARY KEY,  nombre VARCHAR(40), responsable VARCHAR(40));       CREATE TABLE articulo(cod_art SMALLINT PRIMARY KEY, descripcion CHAR(40), precio DECIMAL(7,2));      CREATE TABLE material(cod_mat SMALLINT PRIMARY KEY,  descripcion TEXT(100));        CREATE TABLE proveedor(cod_prov SMALLINT PRIMARY KEY,  nombre VARCHAR(40), domicilio CHAR(40), FOREIGN KEY (cod_ciu) REFERENCES ciudad(cod_ciu), fecha_alta DATE);         CREATE TABLE ciudad (cod_ciu SMALLINT PRIMARY KEY, nombre VARCHAR(40));        CREATE TABLE contiene(nro SMALLINT PRIMARY KEY, FOREIGN KEY (nro) REFERENCES almacen(nro),  cod_art SMALLINT PRIMARY KEY, FOREIGN KEY (cod_art) REFERENCES articulo(cod_art));       CREATE TABLE compuesto_por(cod_art SMALLINT PRIMARY KEY, FOREIGN KEY (cod_art) REFERENCES articulo (cod_art), cod_mat SMALLINT PRIMARY KEY, FOREIGN KEY (cod_mat) REFERENCES material(cod_mat));   CREATE TABLE provisto_por(cod_mat SMALLINT PRIMARY KEY, FOREIGN KEY (cod_mat) REFERENCES material(cod_mat),  cod_prov SMALLINT PRIMARY KEY, FOREIGN KEY (cod_prov) REFERENCES proveedor(cod_porv));     INSERT INTO articulo(cod_art, descripcion, precio) VALUES('A1', 'Alfajor', 250.0),   ('B1', 'Pizza', 2000.0),   ('A2', 'Florero', 29999.99),   ('A3', 'Autito (hotwheels)', 500.0);      SELECT cod_art FROM articulo WHERE precio BETWEEN 100 AND 1000 AND descripcion LIKE 'A%';   SELECT *  FROM proveedor;   SELECT descripcion FROM materia WHERE cod_mat IN(1, 3, 6, 9, 18);      /*cod_mat = 1 OR cod_mat = 3 OR cod_mat = 6 OR cod_mat = 9 OR cod_mat = 18;*/   SELECT cod_prov, nombre FROM proveedor WHERE domicilio LIKE '%Suipacha%' AND fecha_alta BETWEEN '2001-01-01' AND '2002-01-01';   /*fecha_alta >= '2001-01-01' AND fecha_alta < '2002-01-01';                                                              /* YEAR(fecha_alta) = 2001;
+                                                                                                                                                                                                                       

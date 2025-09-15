@@ -1,0 +1,52 @@
+COMO LEVANTAR UNA BD
+1- ABRIR XAMPP, DARLE START AL APACHE Y AL MYSQL
+2- IR A CHROME Y PONER: localhost/phpmyadmin/
+3- EN PHPMYADMIN PONER nueva- sql , y ponerle nombre a la bd
+4-le creamos la tabla con los campos, y continuar, luego clickeas en el nombre de la bd, sql, y le haces los insert, y continuar
+
+DESPUES VAMOS AL VISUAL STUDIO CODE PARA CONECTARNOS A LA BD
+
+<?php
+
+
+//ESTA LINEA ES PARA CONECTAR CON LA BD
+$conexion= mysqli_connect("localhost", "root", "", "bandas") or die ("No se pudo conectar");
+
+//ACA LE PEDIMOS LA QUERY A LA BASE DE DATOS (PUEDE SER CUALQUIER QUERY, YO LE PIDO TODAS LAS TABLAS)
+$sql = "SELECT * FROM bandas";
+//ACA GUARDAMOS EN UNA VARIABLE RESULTADO, LA TABLA DE LA QUERY QUE LE PEDIMOS, Y LA CONEXION DE LA BD
+$result = mysqli_query($conexion, $sql);
+
+
+//EL FETCH ALL HACE QUE GUARDE LAS TABLAS EN UN ARRAY
+$datos = mysqli_fetch_all ($result, MYSQLI_ASSOC);
+
+
+//ITERAMOS EL ARRAY DATOS CON LAS TABLAS GUARDADAS Y MOSTRAMOS CON LOS ECHOS LOS CAMPOS QUE QUEREMOS
+echo "<table border='1'>";
+foreach ($datos as $dato) {
+
+    echo "<tr>";
+
+        echo "<td>" . $dato["id"] . "</td>";
+        echo "<td>" . $dato["nombre"] . "</td>";
+        echo "<td>" . $dato["pais"] . "</td>";
+        echo "<td>" . $dato["genero"] . "</td>";
+
+    echo "</tr>";
+
+}
+echo "</table";
+
+
+
+
+
+
+mysqli_close($conexion);
+
+
+?>
+
+SIEMPRE HAY QUE PONER MSQLI CLOSE PARA CERRAR LA BD
+Y ABRIMOS EL LOCALHOST CON EL INDEX DEL PHP EN EL CHROME

@@ -1,0 +1,118 @@
+TALLER WEB 1
+
+trello para ver las tareas
+
+o usamos una base de datos que ya tenemos descargada en la pc y cambiamos las credenciales o usamos el docker q nos proveen los profes
+ vs code instalar plugin maven for java de microsoft
+ir a puglins - jetty - run, dar play
+
+usar el contains para ver si la palabra contiene un caracter especifico
+
+
+ARQUITECTURA DE CAPAS EN TDD
+
+PRESENTACION O DELIVERY (vistas/controladores): COMO SE MUESTRAN LAS COSAS
+SERVICIOS: COMO SE HACEN LAS COSAS
+REPOSITORIOS: INTERACTUA CON LA BASE DE DATOS
+
+CADA UNA DE LAS CAPAS TIENE SUS CLASES
+Y ESTAN CONECTADAS, CONSUMEN METODOS DE OTRAS CAPAS
+
+test de aceptacion: testean todas las capas en el mismo test
+test unitarios: se hacen test individuales a cada una de las capas
+
+ARQUITECTURA DEL PROYECTO :
+PRESENTACION: controladores, vistas, DTOs, es la cara visible de informacion, son las entidades, es la interaccion con el usuario
+DOMINIO: interfaces de los servicios, implenetaciones de servicios, interfaces de repositorios, entidades, clases que se relacionan con bases de datos (clases q tienen getters seters etc), clases que tienen login, repositorio usuario interfaz, implementacion de susuario servicio,, implementaion de excepciones va todo aquello que resuelva el como se hace, 
+INFRAESTRUCTURA: implementacion de repositorios, solo va eso
+BASE DE DATOS.
+
+LAS INTERFACES SON LAS CARAS VISIBLES HACIA AFUERA, PARA INTERACTUAR
+
+UNA DEPENDENCIA E SUN PRODUCTO, ALGO QUE YO NECESITO PARA QUE PUEDA ANDAR, DEPENDO DE ALGO PARA QUE ANDE
+el archivo POM.XML tiene las dependencias para que el proyecto funciona
+
+
+mvn clean package
+en la carpeta main del proyecto va todo el codigo productivo
+en test va el codigo de testeo
+
+en webapp-- web-inf van las vistas, las html
+en webapp -- resources/core van el css principal, y el js
+
+nos comunicamos con las peticiones con el json, se encuenta en spec --packaje.json
+
+src -- main -- java/com --- dominio , presentacion , infraestructura
+
+CONTROLADORES: ModelAndView
+
+
+MUY IMPORTANTE: COMO HACER TESTS, HACER CONTROLADORES, SERVICIOS ETC
+PARA HACER UN NUEVO ARCHIVO DENTRO DEL PROYECTO
+LOS CODIGOS ´PRODUCTIVOS VAN EN DOMINIO - PRESENTACION
+LOS CODIGOS DE TEST VAN EN TEST - PRESENTACION
+presentacion - new java file - class
+tanto en la carpeta presentacion como en la de presentacion de los test
+se l e pone el nombre de la clase y punto java ahi en el buscador : NombreClase.java
+EL CONTROLADOR SE COMUNICA CON UN SERVICIO
+SERVICIO ES UNA INTERFACE, en este caso ServicioCaja es una interface que va en el dominio
+en los test de controladores se testean las vistas (las vistas son los html que interactua el usuario) y se usan los model and view
+en la preparacion creo el controlador:
+ServicioCaja servicioCaja = mock(ServicioCaja.class);
+
+ControladorCajas controladorCajas = new ControladorCajas(servicioCaja);
+List <CajaDto> cajasDto = new ArrayList<>();
+cajasDto.add(new cajaDto());
+cajasDto.add(new cajaDto());
+when(servicioCaja.obtener()).thenReturn(cajasDto);
+
+en la ejecucion del test va siempr eel model an view:
+ModelAndView modelAndView = controladorCajas.mostrarCajas();
+
+en la verificacion:
+asserThat (modelAndView.getViewName(), equalToIgnoringCase(expectedString:"cajas.html"));
+
+List <CajaDto> cajasDtoObtenidas = (List<CajaDto>)modelAndView.getModel().get("cajas");
+
+assertThath(cajasDtoObtenidas.size(), equalTo (2));
+
+
+
+
+EN LA CLASE DEL CONTROLADOR CAJAS
+
+declaro una list cajas con cajadto
+
+private List<CajaDto> cajas;
+private ServicioCaja servicioCaja;
+
+public ControladorCajas(ServicioCaja servicioCaja){
+	this.cajas = new ArrayList<>();
+ |	this.servicioCaja = servicioCaja;
+}
+
+
+public ModelAndView mostrarCajas(){
+	ModelMap model = new ModelMap();
+	model.put("cajas", this.servicioCaja.obtener());
+	return new ModelAndView("cajas", model);
+}
+
+
+EN LA INTERFAZ SERVICIO CAJA
+List <CajaDto> obtener();
+
+
+PARA LAS CLASES DE CONTROLADOR, ARRIBA DE EL public class 
+va @Controller
+CUANDO UN FORM HTML tiene el atributo th: algo, ES TIMELEAF
+con timeleaf se puede controlar elementos html dinamicos creo
+EN LAS CLASES SERVICIO DE IMPLEMENTACION , arriba del pbucli class va
+@Service
+
+
+LOS METODOS DE CONTROLADORES SIEMPRE DEVUELVE MODEL AND VIEW, CONTIENE UNA VISTA Y MODEL MAP
+
+ACA EL BACKEND CONECTA CON EL FRONT DEL HTML MEDIANTE EL TH DEL HTML
+
+VER CONTROLADOR LOGIN, Y PRACTICAR ENTRENAMIENTO 2

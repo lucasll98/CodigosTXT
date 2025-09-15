@@ -1,0 +1,255 @@
+ENLAZAR HTML CON JAVASCRIPT
+VA EN EL BODY DE HTML
+<script src="nombreDelArchivo.js"></script>
+
+FORMAS DE DECLARAR UNA VARIABLE
+-estructura:
+var/let/const nombreVariable = "";
+
+-ejemplos:
+let nombre ="Lucas";
+var edad =24;
+
+var: variable que se encuentra en un todo
+let: variable que se encuentra en un alcance menor, se encuentra en una zona
+const: no se puede modificar, es constante
+
+PEDIR DATOS CON PROMPT
+var numero = prompt("ingrese un numero");
+console.log(numero);
+
+
+tipos de mostrar mensaje:
+document.write();  ----> muestra en la pagina de chrome
+console.log();  ---> muiestra por consola
+alert(); ---> muestra en una ventanita de mensaje
+
+OPERADORES LOGICOS
+=    IGUALAR
+==   IGUAL
+===  ESTRICTAMENTE IGUAL(MISMO VALOR Y DATO)
+!=   DISTINTO
+!    DIFERENTE  (CAMBIA LA VARIABLE TRUE O FALSE)
+++   INCREMENTO
+--   DECREMENTO
+>    MAYOR
+<    MENOR
+>=   MAYOR IGUAL
+<=   MENOR IGUAL
+&&   AND    (TODASW LAS CONDICIONES VERDADERAS)
+||   OR     (AL MENOS UNA VERDADERA)
+
+
+-ARRAYS
+ESTRUCTURA:
+var nombreArray = ["elemento1","elemento2","elemento3", etc..];
+recorrer el array
+for(let i=0; i<nombreArray.length;i++){
+
+	console.log(nombreArray[i]);
+
+}
+
+
+-OBJETOS/ARRAYS ASOCIATIVOS
+ESTRUCTURA
+var persona{
+	nombre:"Lucas",
+	edad:24,
+	sexo:"M",
+	equipo:"Boca Juniors"
+}
+
+mostrar por consola:
+console.log("nombre: " + persona["nombre"]);
+o tambien se puede guardar las posiciones en variables y mostrar las variables
+var nombre = persona["nombre"];
+console.log("nombre: " + nombre);
+
+-FUNCIONES
+es para ejecutar una porcion de codigo
+ESTRUCTURA:
+function nombreFuncion(){
+
+
+
+}
+nombreFuncion();
+
+-funciones con return
+el return no tiene nada que ver con lo que hace la funcion, se retorna un dato
+
+function nombreFuncion(){
+
+	return dato;
+}
+console.log(dato)
+
+-funciones con parametro
+function nombreFuncion(parametro1,parametro2,etc){
+	
+
+}
+
+nombreFuncion(valor1,valor2,etc);  ---> se le da valor a los parametros
+
+
+-PROGRAMACION ORIENTADA A OBJETOS
+Contiene clases (atributos y metodos) y objetos. Las caracteristicas que debe tenr son:
+-Abstraccion : simplificar el objeto
+-Modularidad: separar el problema por partes
+-Encapsulamiento: encapsula los datos y pone privados sus elementos
+-Polimorfismo: como los objetos se comportan distintos con el mismo metodo
+
+estructura clase:
+
+class NombreClase{
+
+	constructor(atributo1,atributo2,atributo2){
+		this.atributo1=atributo1;
+		this.atributo2=atributo2;
+		this.atributo3=atributo3;
+	}
+
+}
+
+
+metodos: son acciones que hace el objeto y va dentro de la clase, y se lo llama poniendo el nombre del obtejo fuera de la clase con un .nombreMetodo()
+estructura metodo:
+nombreMetodo(){
+
+
+}
+
+nombreObjeto.nombreMetodo();
+
+Crear un objeto e instanciarlo(va fuera de la clase):
+
+var nombreVariableObjeto = new NombreClase ("valorAtributo1", valorAtributo2, "valorAtributo3");
+
+
+-Herencia
+es una o mas clases que hereda la clase principal y se le agregan algunas cosas especificas
+es como la clase hija de la principal (madre) y hereda sus atributos
+-el constructor con sus parametros puede ser igual o no al de la clase madre
+-se le agrega la palabra super
+-se le pueden agregar atributos nuevos o no incluir los que tenia la clase madre
+
+
+estructura:
+class nombreClaseHija extends nombreClaseMadre{
+
+	constructor(atributo1, atributo2){
+		super(atributo1,atributo2);
+	
+	}
+
+
+}
+
+-Getters y Setters
+set: le da valor a algo
+get: obtiene el valor de algo
+
+estructura set:
+set setNombre (parametro){
+	this.atributo=parametro;
+}
+
+estructura get:
+get getNombre (){
+	return this.atributo;
+}
+
+
+instanciar getters y setters:
+nombreObjeto.setNombre = "algo";
+console.log(nombreObjeto.getNombre);
+
+
+-metodos de cadenas
+.includes("algo") -----> devuelve true o false si "algo" se encuentra en la cadena
+.indexOf("e")   ----> devuelve el numero de posicion en que se encuentra la letra e
+cadena[0] -----> muestra la primer letra de la cadena
+.repeat(3) -----> devuelve la cadena repetida 3 veces
+.substring(0,1) ----> devuelve la primer letra de la cadena
+.toLowerCase()  -----> devuelve la cadena en minusculas
+.toUpperCase() ---> devuelve la cadena en mayusculas
+.toString() ----> convierte un elemento en string y devuelve texto
+.length ----> devuelve la cantidad de letras de una cadena
+
+
+
+-metodos de arrays
+.pop() ----> elimina el ultimo eleemnto del array y lo devuelve
+.shift() ---> elimina el primer elemento del array y lo devuelve
+.push("aa")---> agrega un elemento al array "aa"
+.reverse() ----> invierte el array;
+.sort() ----> ordena el array
+.splice(1,3,"a1","a2") ---> elimina elementos de la posicion 1 al 3 y agrega a1 y a2
+
+
+.metodo math
+Math.random() ---> genera numeros aleatorios enttre 0 y 1
+Math.max()  ----> devuelve el numero mayor
+Math.min() ----> devuelve el numero menor
+Math.round() ---> redondea al numero mas cercano
+Math.trunc() ---> elimina los decimales
+
+
+
+
+-EL DOM
+el dom abarca todo, es todo el documento objeto de la pagina, html, css y js
+tiene NODOS, los nodos son todas las etiquetas, se clasifican por(estan ordenadas en jerarquia):
+-Document: es el nodo raiz
+-Element: nodos defiinidos por etiquetas html
+-Text: texto dentro de un nodo element
+-Attribute: los atributos de las etiquetas definen nodos
+
+
+OBTENER ELEMENTOS HTML EN JS
+document.getElementById("nombreID")
+document.getElementByClassName("nombreClase")
+document.getElementByTagName("p") -->agarra todos los elementos p
+querySelectorAll("#nombreID"/".nombreClase")
+
+SETEAR Y OBTENER(GET) ATRIBUTO
+var nombreVariable = document.getElementById("nombreID");
+valor = nombreVariable.setAttribute("type", "text") ----> primero se indica el elemento a cambiar, y segundo el valor
+
+ATRIBUTOS DE INPUTS (tambien se pueden poner en la etiqueta de html)
+var input = document.get.elementById("nombreId");
+input.type =  " "
+input.value = " "
+input.accept = " "
+minlength = "10" ---> va en la etiqueta html del input y lel minimo de caracteres es 10
+placeholder= " "
+required = " "
+
+PARA MODIFICAR ELEMENTOS VA element
+ATRIBUTO STYLE
+var caja = document.getElementbyId("caja");
+caja.style.backgroundColor = "blue";  ---> estructura: nombreVariable.style.propiedad = " "
+
+atributos de classList
+caja.classList.add("cajaGrande"); ---> agrega una clase
+caja.classList.remove("caja"); ---> borra la clase
+caja.classList.contains("caja"); ---> pregunta si contiene la clase y devuelve true o false
+caja.classList.replace("caja","cajaGrande"9 ---> reemplaza la clase caja por la clase cajaGrande
+8:43
+
+
+CREAR ELEMENTOS EN HTML DESDE JS
+
+-con append:
+en html:
+<div class"caja">  </div>
+
+en js
+
+var caja = document.getElementByClass("caja");
+caja.append("<p> hola soy la caja </p>");
+
+-sin append:
+ 

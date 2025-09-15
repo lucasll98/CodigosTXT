@@ -1,0 +1,62 @@
+gitEN LA CARPETA DEL PROYECTO HACER CLICK DERECHO Y ABRIR EL GIT BASH
+git init
+git add .
+git commit -m "  "
+git branch -M main
+git remote add origin linkdelapaginadegit.git  (copiar el link de github)
+git branch -M main
+git push -u origin main
+
+HACER UN NUEVO COMMIT:
+git add .
+git commit -m "  "
+git push -u origin main
+
+HACER UNA RAMA:
+hace una rama y se para en ella:
+git checkout -b nombreRama
+
+CAMBIAR RAMA:
+git checkout nombreRama
+
+UNIR RAMAS
+te paras en una rama por ejemplo la main:
+para el git merge hay que posicionarse en la rama de destino y ahi hacer el merge de la rama a unir
+git checkout main
+y pones la rama a unirse
+git merge nombreRama
+
+PULL
+actualiza el codigo:
+git pull
+
+
+
+CLONAR UN PROYECTO
+vamos al repositorio q queremos clonar en github
+clickeamos <> Code - HTTPS - y copiamos el link del repo
+luego creamos una carpeta nueva en nuestra pc, hacemos git bash here
+
+git init
+git clone "linkdelrepocopiado"
+git remote add "linkdelrepocopiado"
+git checkout main
+git pull origin main
+
+
+PULL ES PARA TRAER EL CODIGO, SIEMPRE AFECTA A LA RAMA EN LA QUE ESTAS PARADO
+PUSH ES PARA SUBIR EL CODIGO
+
+para crear y cambiar a una rama nueva:
+1-git checkout -b nombreRamaNueva
+2-*hacer los cambios en el proyecto*
+3-git add .   ---> agrega los nuevos cambios en la rama nueva
+4-git commit -m "commit rama nueva"
+5-git push -u origin nombreRamaNueva   ---> sube el codigo de la nueva rama al repo y se genera una pull request en el repo el cual se mergea con la rama main
+
+* confirmar el pull request y el merge desde el repositorio en github
+
+para cambiar de rama y traer los cambios a main
+1-git checkout main
+2-git pull origin main   ---> te actualiza el codigo
+

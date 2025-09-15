@@ -1,0 +1,271 @@
+REACT JS
+Se usa por componentes
+js y html van juntos
+son objetos js
+puede reutilizarse y combinarse
+se usa JSX (es escribir el html en el js)
+a las funciones que contienen html se las llaman componentes
+las funciones SIEMPRE EMPIEZAN CON MAYUSCULA
+
+
+******PARA ABRIR LA PAGINA REACT: EN LA CONSOLA/TERMINAL DE VISUAL STUDIO PONER: npm start
+
+-JSX
+estructura (ejemplo hola "nombre")
+
+import React from "react"
+import ReactDOM from "react-dom/client" 
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+function Saludar(){
+	const nombre = "lucas";
+
+	return <h1> Hola {nombre} </h1>
+}
+
+root.render(<div>
+
+	<Saludar/>
+
+</div>);
+
+
+
+otro ejemplo con un objeto persona
+
+
+import React from "react"
+import ReactDOM from "react-dom/client" 
+
+const root = reactDOM.createRoot(document.getElementById("root"));
+
+function Saludar(){
+	var persona = {
+	nombre = "lucas",
+	apellido: "l",
+	edad: 24};
+
+	return <h1> Hola {persona.nombre , persona.apellido }, tenes {persona.edad} años  </h1>
+}
+
+root.render(<div>
+
+	<Saludar/>
+
+</div>);
+
+
+
+-MODULOS ECMASCRIPT (importar y exportar funciones)
+importar en el proyecto react js:
+
+import {NombreFuncion, OtraFuncion} from "./NombreArchivo.js"
+
+y ejecutarla en el root.render(
+	<>
+	<NombreFuncion/>
+	</>
+);
+
+en el archivo NombreArchivo.js donde se encuentra la funcion:
+
+export function NombreFuncion(){
+	return <h1> hola </h1>
+}
+
+
+-REACT PROPS
+se usa el parametro PROPS
+se escriben como atributo y con un valor en las etiquetas jsx
+por ejemplo:
+
+en JSX (hay que importar la funcion siempre):
+import {NombreFuncion} from "./NombreArchivo.js"
+
+root.render(
+	<>
+	<NombreFuncion 
+	nombre= "lucas" 
+	edad={24}
+	juegos = {{ps3: "gta 4" , ps4: "gta 5"}}
+	numeros = {[1,2,3,4]}/>
+
+
+	<NombreFuncion 
+	nombre= "tomas" 
+	edad={20}
+	juegos = {{ps3: "red dead 1" , ps4: "red dead2"}}
+	numeros = {[1,9,8,3]}/>
+
+	</>
+);
+
+en un archivo aparte:
+export function NombreFuncion(props){
+	return( <div>
+			<h1> Nombre: {props.nombre}</h1> 
+			<h2> edad: {props.edad}</h2> 
+			<ul>
+			<li>juegos: {props.juegos.ps3} {props.juegos.ps4}</li>
+			<li> vector de numeros: {props.numeros} </li>
+			</ul>
+		</div>);
+}
+
+
+
+-IMPORTAR ARCHIVO CSS
+HAY 4 FORMAS DE DARLE ESTILO:
+
+1- importando el archivo css:
+en el archivo js donde se usen las clases:
+import "./nombreArchivo.css"
+
+y usar class o className para los elementos a modificar
+
+2-usar el atributo style en las etiquetas html del jsx(se usan las { }), por ejemplo:
+<div style={ {background: "red"}, {color: "white"}, {font-size:"20px" >   </div>
+
+3-usando variables segun el caso se pinta de un color
+
+<div style={(if nombreVariable == true){
+	{background:"green"}
+	}else{
+	{background:"red"}
+	}
+}>  </div>
+
+4-usando clases segun el case se pinta de un color
+en el css:
+.backgoundVerde{
+background:green;
+}
+
+.backgoundRojo{
+background:red;
+}
+
+en el jsx:
+<div className={(if nombreVariable == true){
+	"backgoundVerde"
+	}else{
+	"backgoundRojo"
+	}
+}>  </div>
+
+
+-EVENTOS
+los eventos hacen  determinadas acciones y casi siempre empiezan con on y van como propiedad de la etiqueta html acompañado de la funcion a ejecutar
+
+ejemplo:
+
+<input id="hola" onChange = {function(evento){
+	console.log(evento.target.value);
+}}/>
+
+
+otro ejemplo:
+export function Boton(){
+	return <button onClick={function (){
+	console.log("Hola, activaste el boton");
+	}}>
+	</button>
+}
+
+otro ejemplo formulario sin refrescar la pagina:
+<form onSubmit={function(evento){
+	evento.preventDefault();
+	alert("enviado");
+}}>
+	<button> enviar </button>
+   </form>
+
+
+-ARRAYS
+var usuarios = [
+{
+	nombre: "lucas"
+	id:5
+},
+{
+	nombre:"pepe"
+	id:8
+}
+
+nombres.map(function(nombre, id){
+return <h1> {usuarios.nombre} </h1>);
+
+
+
+
+
+
+<img> src={props.imagen}</img>
+
+
+
+-HOOKERS
+useState
+se importa:
+import {useState} from "react"
+estructura:
+ var [nombreVariable , nombreFuncion] = useState(0);
+
+ejemplo:
+function Contador(){
+
+cons[contador,setContador] = useState(0);
+
+	return(
+	<div>
+		<h1> contador: {contador}</h1>
+		<button onClick={function (){
+			setContador(contador++)
+		}}>
+		sumar
+		</button>
+
+		<button onClick={function (){
+			setContador(contador--)
+		}}>
+		restar
+		</button>
+	</div>
+	)
+}
+
+
+ejemplo con variables:
+var [mensaje , setMensaje] = useState("");
+
+	return(
+	
+      <div>
+	<input onChange = {function(evento){
+	setMensaje(evento.target.value);/>
+
+	<button>
+	guardar mensaje
+	</button>
+      </div<
+    )
+}
+
+}
+
+
+
+useEffect
+importalo:
+import {useEffect} from "react"
+estructura:
+useEffect(function(){
+	console.log("render");
+},[]);
+
+estructura pasandole una variable:
+useEffect(function(){
+	console.log("render");
+},[nombreVariable]);
+

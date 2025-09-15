@@ -1,0 +1,132 @@
+DISEÑO DE APLICACIONES WEB
+
+diseñar es desarrollar y crear un nuevo objeto
+EL DISEÑO DEBE SER SIMPLE
+
+UN REQUISITO ES UNA NECESIDAD QUE TIENE EL USUARIO CON UNA APLICACION,
+EL CONJUNTO DE REQUISITOS TEMRINA DEFINIENDO LA EXISTENCIA Y EL ALCANCE DEL SISTEMA
+EL ALCANCE ES LO QUE EL SISTEMA DEBE HACER
+un requisito debe ser claro, consistente, completo, realista, necesario
+
+REQUISITOS FUNCIONALES DEL USUARIO:estan asociados al usuario, es lo que quiere el usuario
+todo requisito de usuario TIENE UN ID
+es una vision abstracta
+
+REQUISITOS FUNCIONALES DEL SISTEMA: estan desde el punto de vista del sistema
+un requerimiento ampliado es un requisito del sistema
+
+REQUISITOS NO FUNCIONALES: es una restriccion sobre el producto/sistema, debe ser verificable
+hay 3 tipos: de producto (usabilidad, eficiencia, fiabilidad, portabilidad, ejecucion), organizacion (entrega, implementacion, estandares), externos (interaccion, etica, legiscacion, privacidad, seguridad)
+
+DEL PRODUCTO: especifican las restricciones o limites sobre el comportamiento del sistema
+ORGANIZACION: derivan de politicas y procedimientos d ela organizacion
+EXTERNOS: son los que mas pegan y cuestan levantar
+
+REQUISITOS DE DOMINIO
+pueden ser funcionales o no funcionales
+tiene que ver con el contexto, donde estoy parado
+
+
+
+proceso de gestion de requisitos
+concepcion -- indagacion -- elaboracion -- priorizacion -- validacion
+
+
+FUNCIONAL: INFORMACION
+NO FUNCIONAL: RESTRICCION
+
+1-DEFINIR EL ALCANCE (lo que se espera que el sistema haga)
+
+
+
+-CLASE 2
+-CASOS DE USO
+-QUE SON LOS MODELOS
+-EL DISEÑO ES MODELAR ALGO
+UML : LENGUAJE DE MODELADO UNIFICADO
+
+Los requisitos funcionales me dan la escalividad del software
+UN MODELO ES UNA SIMPLIFICACION DE LA REALIDAD, proporciona los planos del sistema
+es una abstraccion vista de una perspectiva
+es un plano de algo real
+se comprende mejor el sistema que se desarrolla, se visualiza mejor, proporciona plantillas y documentacion, son utiles
+siempre es mejor tenenr varios modelos, para ver el problema desde distintas persperctivs
+se interpreta de diferentes maneras
+los modelos van cambiando con el tiempo hay que actualizarlos ya que va cambiando la realidad
+tiene que ser formal
+
+
+el uml es un lenguaje formal para modelar planos
+
+LOS DIAGRAMAS UML expresan graficamente vistas de un modelo
+analisis y diseño existen en continuo
+analisis (requerimientos, dominio, el que)
+diseño (el como, solucion logica)
+
+-diagrama de casos de uso (CU)
+muestra a los actores involucrados en un sistema, las funciones del sistema y como interactuan con los actores, y paquetes
+aca dibujamos, actores (usuarios finales del sismtea) y funcionalidades
+el conjunto de requisitos funcionales me define el alcance
+
+pasos para hacer el diagrama
+1-identificar limites del sistema (alcance), lo que el sistema hace y no hace
+2-identificar los actores que interactuan con el sistema( humanos o maquina) y disparan funcionalidades del sistema
+3- definir los objetivos de cada actor
+4- definisr casos de uso que satisfagan sus objetivos
+
+
+*aclaracion de actores: una persona puede ser el mismo rol, pero son 2 actores diferentes
+*pueden haber muchos casos de uso
+
+grado de aceptacion de diseño en un caso de uso
+conviven ambos mundos 
+caso esencial muy abstracto: requisito funcional sistema
+caso real muy concreto: requisito funcional sistema
+
+
+COMPONENTES DEL DIAGRAMA DE CASOS DE USO
+
+
+
+EL ACTOR: representa un rol, puede ser usuario, hardware otro sistema, se identifica con un muñequito
+ASOCIACION: es una relacion que vincula al actor con un caso de uso, segun la flechita, inicia la relacion el actor o o la recibe
+DESCRIPCION DEL CASO DE USO: es un conjunto de acciones que pueden estar relacionadas
+representa lo que el sistema hace (interaccion con el usuario
+para buscar actores son las entidades externas que tienen interacciones con el sistema
+LOS ACTORES SON LOS QUE APRETAN UN BOTON EN EL SISTEMA, los que se comunican directamente
+Generalizacion de actores: es un tipo de actor que es una herencia, heredan funcionalidad
+CASOS DE USOS CONCRETOS Y ABSTRACTOS
+un caso de uso concreto es iniciado por un actor
+los abstractos no son inicados por un actor, son relacionados con un concreto
+
+ESTRUCTURACION DE CASOS DE USO
+-extension: es un caso de uso que extiende de la funcionalidad de otro, le agrega funcionalidad al caso de uso principal, ES OPCIONAL, se pone con linea puntuada , la palabra extend y la flecha va hacia el uso principal
+-inclusion: es un caso de uso que extiende la funcionalidad de otro, le agrega funcionalidad al caso de uso principal, ES OBLIGATORIO, siempre se ejecutan para el ejecutar el uso principal, se pone con linea puntuada, la palabra include y la flecha va del uso principal al secundario, el resultado no tiene nada que ver con el caso de uso principal
+-generalizacion: tiene q ver con la herencia
+
+
+-Nombre del caso de uso: es una elipsis, es una frase verbal, es una funcionalidad, es lo que hace el actor con interaccion con el sistema, es un verbo que termina en ar er ir
+
+
+la herencia es un superactor que les herede y es padre de otros actores que tambien pueden hacerf el mismo rol, van de flechita desde los hijos a el padre, HEREDAN FUNCIONALIDAD, todo lo que pueda hacer ekl padre tambien lo pueden hacer los hijos, pero los hijos no son iguales
+
+
+reconocer actores y generar casos de uso para los actores
+
+CLASE 3
+
+-- ESPECIFICACION DE CASO DE USO
+es una ficha tecnica que especifica un caso de uso, contiene los siguientes elementos:
+-nombre de caso de uso
+-id (CADA CASO DE USO TIENE UN ID, se lo podemos inventar o viene en los requisitos)
+-actor pricnipal
+-actor secundario (casi interactua con el sistema pero no, interactua con el actor principal)
+-objetivo del caso de uso (el alcance)
+-pre condicion (es donde esta parado el actor principal a la hora de empezar a interactuar)
+-flujo del caso de uso (es la interaccion entre el actor principal y el sistema, son los pasos desde el inicio de interaccion hasta el final)
+-flujos alternativos (son los else de los extends, si va por otra decision, si se toma otra decision)
+
+
+
+
+
